@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="517.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.OrderController">
+<AnchorPane fx:id="scenePane" prefHeight="517.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.OrderController">
    <children>
       <GridPane prefHeight="517.0" prefWidth="405.0">
         <columnConstraints>
@@ -125,7 +125,7 @@
                   <TextField fx:id="txtPrice" editable="false" />
                </children>
             </VBox>
-            <Button fx:id="btnAddToOrder" mnemonicParsing="false" text="Add to Order" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="btnAddToOrder" mnemonicParsing="false" onAction="#addToOrder" text="Add to Order" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>
