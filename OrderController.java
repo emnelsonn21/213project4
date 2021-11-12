@@ -11,6 +11,7 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
@@ -18,6 +19,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class OrderController {
@@ -124,10 +126,34 @@ public class OrderController {
     @FXML
     private TextField txtPrice;
     
+    @FXML
+    private Button btnAddToOrder;
+    
+    private String orderNum;
+ 
+    public void getOrderNum(String orderNum) {
+    	this.orderNum = orderNum;
+    }
+    
+    private boolean firstTime = true;
+    Orders orders = new Orders();
+    
+    public void makeOrders() {
+    	Pizza[] newOrders = new Pizza[10];
+    	orders.setPizzas(newOrders);
+    }
+    
+    Pizza thePizza = new Pizza();
     
     public void setPicDeluxe() {
-    	Toppings[] defaultDeluxeToppings = new Toppings[]{Toppings.SAUSAGE, Toppings.MUSHROOMS, Toppings.ARTICHOKES, Toppings.ONIONS, Toppings.OLIVES};
-    	Deluxe newDeluxe = new Deluxe(Size.SMALL, defaultDeluxeToppings, 14.99);
+    	if (firstTime) {
+    		makeOrders();
+    		firstTime = false;
+    	}
+        boolean didWork = false;
+    	Toppings[] defaultDeluxeToppings = new Toppings[]{Toppings.SAUSAGE, Toppings.MUSHROOMS, Toppings.ARTICHOKES, Toppings.ONIONS, Toppings.OLIVES, null, null};
+    	thePizza = new Deluxe(orderNum, Size.SMALL, defaultDeluxeToppings, 14.99);
+    	thePizza.setNoToppings(5);
     	imgOrder.setImage(deluxeImage);
     	txtSelectedToppings.appendText("Sausage\nMushrooms\nArtichoke Hearts\nOnions\nOlives\n");
     	sausageAdd.setDisable(true);
@@ -139,11 +165,12 @@ public class OrderController {
     	pineappleRemove.setDisable(true);
     	pepperoniRemove.setDisable(true);
     	
-    	newDeluxe.calculatePrice();
-    	txtPrice.setText(String.valueOf(newDeluxe.getPrice()));
+    	thePizza.calculatePrice();
+    	txtPrice.setText(String.valueOf(thePizza.getPrice()));
     	
+    	didWork = orders.add(thePizza);
     	
-    	
+
     }
     
     public void setPicHawaiian() {
@@ -166,55 +193,163 @@ public class OrderController {
     	mnuSize.setText("Large");
     }
     
+    //search for the pizza that we're adding a topping to (orderNum) and update that pizza's number of toppings and also update Toppings[]
     public void addSausage(ActionEvent e) {
+    	Pizza foundPizza = addTopping();
+    	
+       	int index = findEmptySpotToppings(foundPizza.getToppings());
+    	foundPizza.getToppings()[index] = Toppings.SAUSAGE;
+    	
+    	for (int i = 0; i < 7; i++) {
+    		System.out.println(foundPizza.getToppings()[i]);
+    	}
+
     	txtSelectedToppings.appendText("Sausage\n");
     	sausageAdd.setDisable(true);
     	sausageRemove.setDisable(false);
+    	
+    	foundPizza.calculatePrice();
+    	txtPrice.setText(String.valueOf(foundPizza.getPrice()));
     }
     
+    
     public void addMushroom(ActionEvent e) {
+    	Pizza foundPizza = addTopping();
+    	
+       	int index = findEmptySpotToppings(foundPizza.getToppings());
+    	foundPizza.getToppings()[index] = Toppings.MUSHROOMS;
+    	
+    	for (int i = 0; i < 7; i++) {
+    		System.out.println(foundPizza.getToppings()[i]);
+    	}
+    	
     	txtSelectedToppings.appendText("Mushrooms\n");
     	mushroomAdd.setDisable(true);
     	mushroomRemove.setDisable(false);
+    	
+    	foundPizza.calculatePrice();
+    	txtPrice.setText(String.valueOf(foundPizza.getPrice()));
     }
     
     public void addArtichoke(ActionEvent e) {
+    	Pizza foundPizza = addTopping();
+    	
+       	int index = findEmptySpotToppings(foundPizza.getToppings());
+    	foundPizza.getToppings()[index] = Toppings.ARTICHOKES;
+    	
+    	for (int i = 0; i < 7; i++) {
+    		System.out.println(foundPizza.getToppings()[i]);
+    	}
+    	
     	txtSelectedToppings.appendText("Artichoke Hearts\n");
     	artichokeAdd.setDisable(true);
     	artichokeRemove.setDisable(false);
+    	
+    	foundPizza.calculatePrice();
+    	txtPrice.setText(String.valueOf(foundPizza.getPrice()));
     }
     
     public void addOnions(ActionEvent e) {
+    	Pizza foundPizza = addTopping();
+    	
+       	int index = findEmptySpotToppings(foundPizza.getToppings());
+    	foundPizza.getToppings()[index] = Toppings.ONIONS;
+    	
+    	for (int i = 0; i < 7; i++) {
+    		System.out.println(foundPizza.getToppings()[i]);
+    	}
+    	
     	txtSelectedToppings.appendText("Onions\n");
     	onionsAdd.setDisable(true);
     	onionsRemove.setDisable(false);
+    	
+    	foundPizza.calculatePrice();
+    	txtPrice.setText(String.valueOf(foundPizza.getPrice()));
     }
     
     public void addOlives(ActionEvent e) {
+    	Pizza foundPizza = addTopping();
+    	
+       	int index = findEmptySpotToppings(foundPizza.getToppings());
+    	foundPizza.getToppings()[index] = Toppings.OLIVES;
+    	
+    	for (int i = 0; i < 7; i++) {
+    		System.out.println(foundPizza.getToppings()[i]);
+    	}
+    	
     	txtSelectedToppings.appendText("Olives\n");
     	olivesAdd.setDisable(true);
     	olivesRemove.setDisable(false);
+    	
+    	foundPizza.calculatePrice();
+    	txtPrice.setText(String.valueOf(foundPizza.getPrice()));
     }
     
     public void addHam(ActionEvent e) {
+    	Pizza foundPizza = addTopping();
+    	
+       	int index = findEmptySpotToppings(foundPizza.getToppings());
+    	foundPizza.getToppings()[index] = Toppings.HAM;
+    	
+    	for (int i = 0; i < 7; i++) {
+    		System.out.println(foundPizza.getToppings()[i]);
+    	}
+    	
     	txtSelectedToppings.appendText("Ham\n");
     	hamAdd.setDisable(true);
     	hamRemove.setDisable(false);
+    	
+    	foundPizza.calculatePrice();
+    	txtPrice.setText(String.valueOf(foundPizza.getPrice()));
     }
     
     public void addPineapple(ActionEvent e) {
+    	Pizza foundPizza = addTopping();
+    	
+       	int index = findEmptySpotToppings(foundPizza.getToppings());
+    	foundPizza.getToppings()[index] = Toppings.PINEAPPLE;
+    	
+    	for (int i = 0; i < 7; i++) {
+    		System.out.println(foundPizza.getToppings()[i]);
+    	}
+    	
     	txtSelectedToppings.appendText("Pineapple\n");
     	pineappleAdd.setDisable(true);
     	pineappleRemove.setDisable(false);
+    	
+    	foundPizza.calculatePrice();
+    	txtPrice.setText(String.valueOf(foundPizza.getPrice()));
     }
-    
+   
     public void addPepperoni(ActionEvent e) {
+    	Pizza foundPizza = addTopping();
+    	
+    	int index = findEmptySpotToppings(foundPizza.getToppings());
+    	foundPizza.getToppings()[index] = Toppings.PEPPERONI;
+    	
+    	for (int i = 0; i < 7; i++) {
+    		System.out.println(foundPizza.getToppings()[i]);
+    	}
     	txtSelectedToppings.appendText("Pepperoni\n");
     	pepperoniAdd.setDisable(true);
     	pepperoniRemove.setDisable(false);
+    	
+    	foundPizza.calculatePrice();
+    	txtPrice.setText(String.valueOf(foundPizza.getPrice()));
     }
     
+
+    
     public void removeSausage(ActionEvent e) {
+    	Pizza foundPizza = removeTopping();
+    	
+    	int index = findTopping(foundPizza.getToppings(), Toppings.SAUSAGE);
+    	foundPizza.getToppings()[index] = null;
+    	
+    	if (index < 6) {
+    		moveDown(foundPizza, index);
+    	}
+
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
     	int i = top.indexOf("Sausage");
@@ -225,7 +360,17 @@ public class OrderController {
     	sausageRemove.setDisable(true);
     }
     
+
+    
     public void removeMushroom(ActionEvent e) {
+    	Pizza foundPizza = removeTopping();
+    	
+    	int index = findTopping(foundPizza.getToppings(), Toppings.MUSHROOMS);
+    	foundPizza.getToppings()[index] = null;
+    	
+    	if (index < 6) {
+    		moveDown(foundPizza, index);
+    	}
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
     	int i = top.indexOf("Mushrooms");
@@ -236,7 +381,16 @@ public class OrderController {
     	mushroomRemove.setDisable(true);
     }
     
+    
     public void removeArtichoke(ActionEvent e) {
+    	Pizza foundPizza = removeTopping();
+    	
+    	int index = findTopping(foundPizza.getToppings(), Toppings.ARTICHOKES);
+    	foundPizza.getToppings()[index] = null;
+    	
+    	if (index < 6) {
+    		moveDown(foundPizza, index);
+    	}
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
     	int i = top.indexOf("Artichoke Hearts");
@@ -248,6 +402,14 @@ public class OrderController {
     }
     
     public void removeOnions(ActionEvent e) {
+    	Pizza foundPizza = removeTopping();
+    	
+    	int index = findTopping(foundPizza.getToppings(), Toppings.ONIONS);
+    	foundPizza.getToppings()[index] = null;
+    	
+    	if (index < 6) {
+    		moveDown(foundPizza, index);
+    	}
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
     	int i = top.indexOf("Onions");
@@ -259,6 +421,14 @@ public class OrderController {
     }
     
     public void removeOlives(ActionEvent e) {
+    	Pizza foundPizza = removeTopping();
+    	
+    	int index = findTopping(foundPizza.getToppings(), Toppings.OLIVES);
+    	foundPizza.getToppings()[index] = null;
+    	
+    	if (index < 6) {
+    		moveDown(foundPizza, index);
+    	}
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
     	int i = top.indexOf("Olives");
@@ -270,6 +440,14 @@ public class OrderController {
     }
     
     public void removeHam(ActionEvent e) {
+    	Pizza foundPizza = removeTopping();
+    	
+    	int index = findTopping(foundPizza.getToppings(), Toppings.HAM);
+    	foundPizza.getToppings()[index] = null;
+    	
+    	if (index < 6) {
+    		moveDown(foundPizza, index);
+    	}
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
     	int i = top.indexOf("Ham");
@@ -281,6 +459,14 @@ public class OrderController {
     }
     
     public void removePineapple(ActionEvent e) {
+    	Pizza foundPizza = removeTopping();
+    	
+    	int index = findTopping(foundPizza.getToppings(), Toppings.PINEAPPLE);
+    	foundPizza.getToppings()[index] = null;
+    	
+    	if (index < 6) {
+    		moveDown(foundPizza, index);
+    	}
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
     	int i = top.indexOf("Pineapple");
@@ -292,6 +478,14 @@ public class OrderController {
     }
     
     public void removePepperoni(ActionEvent e) {
+    	Pizza foundPizza = removeTopping();
+    	
+    	int index = findTopping(foundPizza.getToppings(), Toppings.PEPPERONI);
+    	foundPizza.getToppings()[index] = null;
+    	
+    	if (index < 6) {
+    		moveDown(foundPizza, index);
+    	}
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
     	int i = top.indexOf("Pepperoni");
@@ -303,7 +497,91 @@ public class OrderController {
     	
     }
     
-    public void priceChange(ActionEvent e) {
-    	
+    public void addToOrder() {
+		try {
+			Stage newStage = new Stage();
+	    	VBox popup = new VBox();
+			Label notif  = new Label("\n\n\t\t Successfully Added to Order.");
+	    	popup.getChildren().add(notif);
+	    	Scene stageScene = new Scene(popup, 250, 100);
+	    	newStage.setScene(stageScene);
+	    	newStage.setTitle("Order Confirmation");
+	    	newStage.show();
+	    	return;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
     }
+    
+    public boolean checkToppings(int numToppings) {
+    	if (numToppings > 7) {
+    		try {
+    			Stage newStage = new Stage();
+		    	VBox popup = new VBox();
+    			Label warning  = new Label("\n\n\t\t No more than 7 toppings.");
+		    	popup.getChildren().add(warning);
+		    	Scene stageScene = new Scene(popup, 250, 100);
+		    	newStage.setScene(stageScene);
+		    	newStage.setTitle("Warning");
+		    	newStage.show();
+		    	return false;
+    		} catch(Exception e) {
+    			e.printStackTrace();
+    		}
+    	}
+    	
+    	return true;
+    }
+    
+    public Pizza addTopping() {
+    	Pizza newPizza = new Pizza(orderNum);
+    	
+    	Pizza foundPizza = orders.getPizza(newPizza);
+    	foundPizza.setNoToppings(foundPizza.getNoToppings() + 1);
+    	if (!checkToppings(foundPizza.getNoToppings())) {
+    		return null;
+    	}
+    	
+    	return foundPizza;
+    }
+    
+    public Pizza removeTopping() {
+    	Pizza newPizza = new Pizza(orderNum);
+    	
+    	Pizza foundPizza = orders.getPizza(newPizza);
+    	foundPizza.setNoToppings(foundPizza.getNoToppings() - 1);
+    	return foundPizza;
+    }
+    
+    public int findTopping(Toppings[] toppings, Toppings topping) {
+    	for (int i = 0; i < 7; i++) {
+    		if (toppings[i] == topping) {
+    			return i;
+    		}
+    	}
+    	
+    	return -1;
+    }
+    
+    public void moveDown(Pizza foundPizza, int index) {
+		while (index < 6) {
+			foundPizza.getToppings()[index] = foundPizza.getToppings()[index+1];
+			index++;
+		}
+		
+		foundPizza.getToppings()[index] = null;
+    }
+    
+	public int findEmptySpotToppings(Toppings[] toppings) {
+		for (int i = 0; i < toppings.length; i++) {
+			if (toppings[i] == null) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	public void forgetPizza() {
+		boolean b = orders.remove(thePizza);
+	}
 }
