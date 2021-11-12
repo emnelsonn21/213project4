@@ -35,7 +35,9 @@ public class Pizza {
 	public String toString() {
 		String theToppings = "";
 		for (int i = 0; i < toppings.length; i++) {
-			theToppings += toppings[i] + ", ";
+			if (toppings[i] != null) {
+				theToppings += toppings[i] + ", ";
+			}
 		}
 		
 		DecimalFormat df = new DecimalFormat("0.00");
