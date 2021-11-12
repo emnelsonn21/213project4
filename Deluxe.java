@@ -2,8 +2,8 @@ package application;
 
 public class Deluxe extends Pizza {
 
-	public Deluxe(Size size, Toppings[] toppings, double price) {
-		super(size, toppings, price);
+	public Deluxe(String orderNumber, Size size, Toppings[] toppings, double price) {
+		super(orderNumber, size, toppings, price);
 	}
 	
 	@Override
@@ -20,9 +20,8 @@ public class Deluxe extends Pizza {
 			price = 16.99;
 		}
 		
-		Toppings[] temp = this.getToppings();
-		if (temp.length > 5) {
-			int i = temp.length - 5;
+		if (this.getNoToppings() > 5) {
+			int i = this.getNoToppings() - 5;
 			while (i > 0) {
 				price += 1.49;
 				i--;
