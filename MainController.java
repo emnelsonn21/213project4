@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
@@ -109,11 +110,15 @@ public class MainController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("orderPizzaView.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             OrderController orderDeluxe = fxmlLoader.getController();
+            orderDeluxe.getOrderNum(custID);
             orderDeluxe.setPicDeluxe();
             
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));  
             stage.setTitle("Customize Pizza");
+	    	stage.setOnCloseRequest(e -> {
+	    			orderDeluxe.forgetPizza();
+	    	});
             stage.show();
         } catch(Exception e) {
             e.printStackTrace();
