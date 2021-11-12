@@ -125,7 +125,7 @@
                   <TextField fx:id="txtPrice" editable="false" />
                </children>
             </VBox>
-            <Button mnemonicParsing="false" text="Add to Order" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Button fx:id="btnAddToOrder" mnemonicParsing="false" text="Add to Order" GridPane.columnIndex="2" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>
