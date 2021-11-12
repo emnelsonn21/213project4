@@ -7,9 +7,11 @@ public class Pizza {
 	public void calculatePrice() {
 	}
 
+	private String orderNumber;
 	private Size size;
 	//private Type type;
 	private Toppings[] toppings;
+	private int noToppings;
 	private double price;
 	
 	
@@ -17,7 +19,12 @@ public class Pizza {
 		
 	}
 	
-	public Pizza(Size size, Toppings[] toppings, double price) {
+	public Pizza(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+	
+	public Pizza(String orderNumber, Size size, Toppings[] toppings, double price) {
+		this.orderNumber = orderNumber;
 		this.size = size;
 		this.toppings = toppings;
 		this.price = price;
@@ -34,6 +41,11 @@ public class Pizza {
 		DecimalFormat df = new DecimalFormat("0.00");
 		
 		return String.valueOf(size) + " pizza with " + theToppings + " for " + df.format(price);
+	}
+	
+	
+	public String getOrderNumber() {
+		return orderNumber;
 	}
 	
 	public Size getSize() {
@@ -54,6 +66,18 @@ public class Pizza {
 	
 	public Toppings[] getToppings() {
 		return toppings;
+	}
+	
+	public void setToppings(Toppings[] toppings) {
+		this.toppings = toppings;
+	}
+	
+	public int getNoToppings() {
+		return noToppings;
+	}
+	
+	public void setNoToppings(int noToppings) {
+		this.noToppings = noToppings;
 	}
 }
 
