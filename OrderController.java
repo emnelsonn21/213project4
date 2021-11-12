@@ -19,6 +19,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -129,6 +130,11 @@ public class OrderController {
     @FXML
     private Button btnAddToOrder;
     
+    Stage stage;
+    
+    @FXML
+    private AnchorPane scenePane;
+    
     private String orderNum;
  
     public void getOrderNum(String orderNum) {
@@ -187,22 +193,36 @@ public class OrderController {
     }
     public void changeToMedium(ActionEvent e) {
     	mnuSize.setText("Medium");
+    	
+    	Pizza newPizza = new Pizza(orderNum);
+    	
+    	Pizza foundPizza = orders.getPizza(newPizza);
+    	
+    	foundPizza.setSize(Size.MEDIUM);
+    	
+    	foundPizza.calculatePrice();
+    	txtPrice.setText(String.valueOf(foundPizza.getPrice()));
+    	
     }
     
     public void changeToLarge(ActionEvent e) {
     	mnuSize.setText("Large");
+    	Pizza newPizza = new Pizza(orderNum);
+    	
+    	Pizza foundPizza = orders.getPizza(newPizza);
+    	
+    	foundPizza.setSize(Size.LARGE);
+    	
+    	foundPizza.calculatePrice();
+    	txtPrice.setText(String.valueOf(foundPizza.getPrice()));
     }
     
-    //search for the pizza that we're adding a topping to (orderNum) and update that pizza's number of toppings and also update Toppings[]
+    
     public void addSausage(ActionEvent e) {
     	Pizza foundPizza = addTopping();
     	
        	int index = findEmptySpotToppings(foundPizza.getToppings());
     	foundPizza.getToppings()[index] = Toppings.SAUSAGE;
-    	
-    	for (int i = 0; i < 7; i++) {
-    		System.out.println(foundPizza.getToppings()[i]);
-    	}
 
     	txtSelectedToppings.appendText("Sausage\n");
     	sausageAdd.setDisable(true);
@@ -219,10 +239,6 @@ public class OrderController {
        	int index = findEmptySpotToppings(foundPizza.getToppings());
     	foundPizza.getToppings()[index] = Toppings.MUSHROOMS;
     	
-    	for (int i = 0; i < 7; i++) {
-    		System.out.println(foundPizza.getToppings()[i]);
-    	}
-    	
     	txtSelectedToppings.appendText("Mushrooms\n");
     	mushroomAdd.setDisable(true);
     	mushroomRemove.setDisable(false);
@@ -237,9 +253,6 @@ public class OrderController {
        	int index = findEmptySpotToppings(foundPizza.getToppings());
     	foundPizza.getToppings()[index] = Toppings.ARTICHOKES;
     	
-    	for (int i = 0; i < 7; i++) {
-    		System.out.println(foundPizza.getToppings()[i]);
-    	}
     	
     	txtSelectedToppings.appendText("Artichoke Hearts\n");
     	artichokeAdd.setDisable(true);
@@ -254,10 +267,7 @@ public class OrderController {
     	
        	int index = findEmptySpotToppings(foundPizza.getToppings());
     	foundPizza.getToppings()[index] = Toppings.ONIONS;
-    	
-    	for (int i = 0; i < 7; i++) {
-    		System.out.println(foundPizza.getToppings()[i]);
-    	}
+ 
     	
     	txtSelectedToppings.appendText("Onions\n");
     	onionsAdd.setDisable(true);
@@ -273,10 +283,6 @@ public class OrderController {
        	int index = findEmptySpotToppings(foundPizza.getToppings());
     	foundPizza.getToppings()[index] = Toppings.OLIVES;
     	
-    	for (int i = 0; i < 7; i++) {
-    		System.out.println(foundPizza.getToppings()[i]);
-    	}
-    	
     	txtSelectedToppings.appendText("Olives\n");
     	olivesAdd.setDisable(true);
     	olivesRemove.setDisable(false);
@@ -290,10 +296,6 @@ public class OrderController {
     	
        	int index = findEmptySpotToppings(foundPizza.getToppings());
     	foundPizza.getToppings()[index] = Toppings.HAM;
-    	
-    	for (int i = 0; i < 7; i++) {
-    		System.out.println(foundPizza.getToppings()[i]);
-    	}
     	
     	txtSelectedToppings.appendText("Ham\n");
     	hamAdd.setDisable(true);
@@ -309,10 +311,6 @@ public class OrderController {
        	int index = findEmptySpotToppings(foundPizza.getToppings());
     	foundPizza.getToppings()[index] = Toppings.PINEAPPLE;
     	
-    	for (int i = 0; i < 7; i++) {
-    		System.out.println(foundPizza.getToppings()[i]);
-    	}
-    	
     	txtSelectedToppings.appendText("Pineapple\n");
     	pineappleAdd.setDisable(true);
     	pineappleRemove.setDisable(false);
@@ -326,10 +324,6 @@ public class OrderController {
     	
     	int index = findEmptySpotToppings(foundPizza.getToppings());
     	foundPizza.getToppings()[index] = Toppings.PEPPERONI;
-    	
-    	for (int i = 0; i < 7; i++) {
-    		System.out.println(foundPizza.getToppings()[i]);
-    	}
     	txtSelectedToppings.appendText("Pepperoni\n");
     	pepperoniAdd.setDisable(true);
     	pepperoniRemove.setDisable(false);
@@ -358,6 +352,9 @@ public class OrderController {
     	
     	sausageAdd.setDisable(false);
     	sausageRemove.setDisable(true);
+    	
+    	foundPizza.calculatePrice();
+    	txtPrice.setText(String.valueOf(foundPizza.getPrice()));
     }
     
 
@@ -379,6 +376,9 @@ public class OrderController {
     	
     	mushroomAdd.setDisable(false);
     	mushroomRemove.setDisable(true);
+    	
+    	foundPizza.calculatePrice();
+    	txtPrice.setText(String.valueOf(foundPizza.getPrice()));
     }
     
     
@@ -399,6 +399,9 @@ public class OrderController {
     	
     	artichokeAdd.setDisable(false);
     	artichokeRemove.setDisable(true);
+    	
+    	foundPizza.calculatePrice();
+    	txtPrice.setText(String.valueOf(foundPizza.getPrice()));
     }
     
     public void removeOnions(ActionEvent e) {
@@ -418,6 +421,9 @@ public class OrderController {
     	
     	onionsAdd.setDisable(false);
     	onionsRemove.setDisable(true);
+    	
+    	foundPizza.calculatePrice();
+    	txtPrice.setText(String.valueOf(foundPizza.getPrice()));
     }
     
     public void removeOlives(ActionEvent e) {
@@ -437,6 +443,9 @@ public class OrderController {
     	
     	olivesAdd.setDisable(false);
     	olivesRemove.setDisable(true);
+    	
+    	foundPizza.calculatePrice();
+    	txtPrice.setText(String.valueOf(foundPizza.getPrice()));
     }
     
     public void removeHam(ActionEvent e) {
@@ -456,6 +465,9 @@ public class OrderController {
     	
     	hamAdd.setDisable(false);
     	hamRemove.setDisable(true);
+    	
+    	foundPizza.calculatePrice();
+    	txtPrice.setText(String.valueOf(foundPizza.getPrice()));
     }
     
     public void removePineapple(ActionEvent e) {
@@ -475,6 +487,9 @@ public class OrderController {
     	
     	pineappleAdd.setDisable(false);
     	pineappleRemove.setDisable(true);
+    	
+    	foundPizza.calculatePrice();
+    	txtPrice.setText(String.valueOf(foundPizza.getPrice()));
     }
     
     public void removePepperoni(ActionEvent e) {
@@ -494,6 +509,9 @@ public class OrderController {
     	
     	pepperoniAdd.setDisable(false);
     	pepperoniRemove.setDisable(true);
+    	
+    	foundPizza.calculatePrice();
+    	txtPrice.setText(String.valueOf(foundPizza.getPrice()));
     	
     }
     
@@ -581,7 +599,12 @@ public class OrderController {
 		return -1;
 	}
 	
+	public void addToOrder(ActionEvent e) {
+		stage = (Stage) scenePane.getScene().getWindow();
+		orders.printOrders();
+		stage.close();
+	}
 	public void forgetPizza() {
-		boolean b = orders.remove(thePizza);
+		orders.remove(thePizza);
 	}
 }
