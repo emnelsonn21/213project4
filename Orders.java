@@ -56,11 +56,19 @@ public class Orders {
 		return size;
 	}
 	
+	public void printOrders() {
+		if (size == 0) {
+			return;
+		}
+		
+		for (int i = 0; i < size; i++) {
+			System.out.println(orders[i].toString());
+		}
+	}
+	
 	public Pizza getPizza(Pizza pizza) {
 		Pizza foundPiz = new Pizza();
 		int i = find(pizza);
-		
-		System.out.println("index is " + i);
 		
 		if (i != -1) {
 			foundPiz = orders[i];
