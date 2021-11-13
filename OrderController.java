@@ -145,6 +145,8 @@ public class OrderController {
     }
 
     private Order order;
+    
+	private StoreOrders storeOrders;
        
    
     Pizza thePizza = new Pizza();
@@ -498,6 +500,7 @@ public class OrderController {
     	
     }
     
+    /*
     public void addToOrder() {
 		try {
 			Stage newStage = new Stage();
@@ -513,6 +516,7 @@ public class OrderController {
 			e.printStackTrace();
 		}
     }
+    */
     
     public boolean checkToppings(int numToppings) {
     	if (numToppings > 7) {
@@ -564,15 +568,16 @@ public class OrderController {
 	}
 	
 
+	private Order[] allOrders;
 	public void addToOrder(ActionEvent e) {
 		stage = (Stage) scenePane.getScene().getWindow();
 		order.add(thePizza);
 		order.printOrder();
 
-		StoreOrders storeOrders = new StoreOrders();
-		Order[] allOrders = new Order[1];
-		storeOrders.setAllOrders(allOrders);
+		allOrders = new Order[10];
+		//storeOrders.setAllOrders(allOrders);
 		storeOrders.addToOrders(order);
+		
 		try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("View.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
@@ -581,27 +586,13 @@ public class OrderController {
 		} catch (Exception exception) {
 			
 		}
+		storeOrders.printAllOrders();
 		stage.close();
 	}
-
 	
-	public void openViewOrderPage() {
-        try {
-        	
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ReviewOrderView.fxml"));
-            Parent root1 = (Parent) fxmlLoader.load();
-            ReviewOrderController reviewOrder = fxmlLoader.getController();
-            reviewOrder.getOrderNum(orderNum);
-            
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root1));  
-            stage.setTitle("Review Order");
-            stage.show();
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+	public void setTheStoreOrders(StoreOrders storeOrders) {
+		this.storeOrders = storeOrders;
 	}
-	
 	public void setOrder(Order order) {
 		this.order = order;
 	}
