@@ -22,12 +22,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class MainController {
-	
-	Order orders = new Order();
-	public void makeOrders() {
-		Pizza[] newOrders = new Pizza[4];
-		orders.setPizzas(newOrders);
-	}
 
     @FXML
     private Button btnDownlaod;
@@ -58,6 +52,16 @@ public class MainController {
     
     private String custID = "";
     
+    //only need to make an order when it's a new customer - different custID
+    Order order = new Order();
+    public void makeNewOrder() {
+    	Pizza[] newOrders = new Pizza[10];
+    	order.setPizzas(newOrders);
+    }
+    
+    //only need to make a store order when the mainController window is opened for the first time
+    public StoreOrders storeOrders = new StoreOrders();
+    
  
     public void showConfirmation(KeyEvent event) throws Exception {
     	if(event.getCode().equals(KeyCode.ENTER)) {
@@ -76,6 +80,8 @@ public class MainController {
 			    	newStage.setTitle("Order Confirmation");
 			    	newStage.show();
 	    		} else {
+	    			makeNewOrder();
+	    			order.setOrderNumber(custID);
 			    	Label confirm  = new Label("\n\n\t\t Starting order. \n\t\t Order ID is " + custID);
 			    	popup.getChildren().add(confirm);
 			    	Scene stageScene = new Scene(popup, 250, 100);
@@ -88,7 +94,7 @@ public class MainController {
 	    	}
     	}
     }
-    
+
     public void openDeluxeOrderPage(ActionEvent event) throws Exception { 
     	if (custID.equals("")) {
     		try {
@@ -106,19 +112,17 @@ public class MainController {
     		}
     	}
         try {
-        	
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("orderPizzaView.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             OrderController orderDeluxe = fxmlLoader.getController();
-            orderDeluxe.getOrderNum(custID);
+            
+            orderDeluxe.setOrder(order);
+            orderDeluxe.setOrderNum(custID);
             orderDeluxe.setPicDeluxe();
             
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));  
             stage.setTitle("Customize Pizza");
-	    	stage.setOnCloseRequest(e -> {
-	    			orderDeluxe.forgetPizza();
-	    	});
             stage.show();
         } catch(Exception e) {
             e.printStackTrace();
@@ -146,12 +150,14 @@ public class MainController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("orderPizzaView.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             OrderController orderHawaiian = fxmlLoader.getController();
+            orderHawaiian.setOrderNum(custID);
             orderHawaiian.setPicHawaiian();
             
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));  
             stage.setTitle("Customize Pizza");
-            stage.show();
+
+	    	stage.show();
         } catch(Exception e) {
             e.printStackTrace();
         }
@@ -178,6 +184,7 @@ public class MainController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("orderPizzaView.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
             OrderController orderPepperoni = fxmlLoader.getController();
+            orderPepperoni.setOrderNum(custID);
             orderPepperoni.setPicPepperoni();
             
             Stage stage = new Stage();
@@ -202,5 +209,13 @@ public class MainController {
     	
     	return true;
     }
+    
+	public void setStoreOrders(StoreOrders storeOrders) {
+		this.storeOrders = storeOrders;
+	}
+	
+	public void addToStoreOrders(Order order) {
+		storeOrders.addToOrders(order);
+	}
     
 }
