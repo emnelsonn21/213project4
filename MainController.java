@@ -18,6 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -50,6 +51,7 @@ public class MainController {
     @FXML
     private ImageView pepperoniImage;
     
+    @FXML
     private String custID = "";
     
     //only need to make an order when it's a new customer - different custID
@@ -60,7 +62,8 @@ public class MainController {
     }
     
     //only need to make a store order when the mainController window is opened for the first time
-    public StoreOrders storeOrders = new StoreOrders();
+    @FXML
+    private StoreOrders storeOrders;
     
  
     public void showConfirmation(KeyEvent event) throws Exception {
@@ -79,7 +82,7 @@ public class MainController {
 			    	newStage.setScene(stageScene);
 			    	newStage.setTitle("Order Confirmation");
 			    	newStage.show();
-	    		} else {
+	    		} else {	
 	    			makeNewOrder();
 	    			order.setOrderNumber(custID);
 			    	Label confirm  = new Label("\n\n\t\t Starting order. \n\t\t Order ID is " + custID);
@@ -119,6 +122,7 @@ public class MainController {
             orderDeluxe.setOrder(order);
             orderDeluxe.setOrderNum(custID);
             orderDeluxe.setPicDeluxe();
+            orderDeluxe.setTheStoreOrders(storeOrders);
             
             Stage stage = new Stage();
             stage.setScene(new Scene(root1));  
@@ -210,8 +214,29 @@ public class MainController {
     	return true;
     }
     
+    public void openViewOrderPage(ActionEvent event) {
+    	//AnchorPane root = new AnchorPane();
+        try {
+        	FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("ReviewOrderView.fxml"));
+        	Parent root1 = (Parent) fxmlLoader1.load();
+            ReviewOrderController reviewOrder = (ReviewOrderController) fxmlLoader1.getController();
+        	Stage stage = new Stage();
+            stage.setScene(new Scene(root1));  
+            stage.setTitle("Review Order");
+            stage.show();
+            
+            reviewOrder.takeOrderNum(custID);
+            reviewOrder.getAllOrders(storeOrders.getAllOrders());
+            reviewOrder.fillOrderReviewList2(storeOrders.getAllOrders());
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+	}
+    
 	public void setStoreOrders(StoreOrders storeOrders) {
 		this.storeOrders = storeOrders;
+		System.out.println("Set for main. Length of allOrders is " + this.storeOrders.getAllOrders().length);
 	}
 	
 	public void addToStoreOrders(Order order) {
