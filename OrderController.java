@@ -137,29 +137,26 @@ public class OrderController {
     
     private String orderNum;
  
-    public void getOrderNum(String orderNum) {
+    public String getOrderNum() {
+    	return orderNum;
+    }
+    public void setOrderNum(String orderNum) {
     	this.orderNum = orderNum;
     }
-    
-    private boolean firstTime = true;
-    Orders orders = new Orders();
-    
-    public void makeOrders() {
-    	Pizza[] newOrders = new Pizza[10];
-    	orders.setPizzas(newOrders);
-    }
-    
+
+    private Order order;
+       
+   
     Pizza thePizza = new Pizza();
     
     public void setPicDeluxe() {
-    	if (firstTime) {
-    		makeOrders();
-    		firstTime = false;
-    	}
-        boolean didWork = false;
     	Toppings[] defaultDeluxeToppings = new Toppings[]{Toppings.SAUSAGE, Toppings.MUSHROOMS, Toppings.ARTICHOKES, Toppings.ONIONS, Toppings.OLIVES, null, null};
-    	thePizza = new Deluxe(orderNum, Size.SMALL, defaultDeluxeToppings, 14.99);
+    	thePizza = PizzaMaker.createPizza("Deluxe");
+    	thePizza.setOrderNumber(orderNum);
+    	thePizza.setSize(Size.SMALL);
+    	thePizza.setToppings(defaultDeluxeToppings);
     	thePizza.setNoToppings(5);
+    	
     	imgOrder.setImage(deluxeImage);
     	txtSelectedToppings.appendText("Sausage\nMushrooms\nArtichoke Hearts\nOnions\nOlives\n");
     	sausageAdd.setDisable(true);
@@ -174,7 +171,6 @@ public class OrderController {
     	thePizza.calculatePrice();
     	txtPrice.setText(String.valueOf(thePizza.getPrice()));
     	
-    	didWork = orders.add(thePizza);
     	
 
     }
@@ -196,7 +192,7 @@ public class OrderController {
     	
     	Pizza newPizza = new Pizza(orderNum);
     	
-    	Pizza foundPizza = orders.getPizza(newPizza);
+    	Pizza foundPizza = order.getPizza(newPizza);
     	
     	foundPizza.setSize(Size.MEDIUM);
     	
@@ -209,7 +205,7 @@ public class OrderController {
     	mnuSize.setText("Large");
     	Pizza newPizza = new Pizza(orderNum);
     	
-    	Pizza foundPizza = orders.getPizza(newPizza);
+    	Pizza foundPizza = order.getPizza(newPizza);
     	
     	foundPizza.setSize(Size.LARGE);
     	
@@ -554,7 +550,7 @@ public class OrderController {
     public Pizza addTopping() {
     	Pizza newPizza = new Pizza(orderNum);
     	
-    	Pizza foundPizza = orders.getPizza(newPizza);
+    	Pizza foundPizza = order.getPizza(newPizza);
     	foundPizza.setNoToppings(foundPizza.getNoToppings() + 1);
     	if (!checkToppings(foundPizza.getNoToppings())) {
     		return null;
@@ -566,7 +562,7 @@ public class OrderController {
     public Pizza removeTopping() {
     	Pizza newPizza = new Pizza(orderNum);
     	
-    	Pizza foundPizza = orders.getPizza(newPizza);
+    	Pizza foundPizza = order.getPizza(newPizza);
     	foundPizza.setNoToppings(foundPizza.getNoToppings() - 1);
     	return foundPizza;
     }
@@ -599,12 +595,46 @@ public class OrderController {
 		return -1;
 	}
 	
+
 	public void addToOrder(ActionEvent e) {
 		stage = (Stage) scenePane.getScene().getWindow();
-		orders.printOrders();
+		order.add(thePizza);
+		order.printOrder();
+
+		StoreOrders storeOrders = new StoreOrders();
+		Order[] allOrders = new Order[1];
+		storeOrders.setAllOrders(allOrders);
+		storeOrders.addToOrders(order);
+		try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("View.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            MainController mainCont = fxmlLoader.getController();
+            mainCont.setStoreOrders(storeOrders);
+		} catch (Exception exception) {
+			
+		}
 		stage.close();
 	}
-	public void forgetPizza() {
-		orders.remove(thePizza);
+
+	
+	public void openViewOrderPage() {
+        try {
+        	
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ReviewOrderView.fxml"));
+            Parent root1 = (Parent) fxmlLoader.load();
+            ReviewOrderController reviewOrder = fxmlLoader.getController();
+            reviewOrder.getOrderNum(orderNum);
+            
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));  
+            stage.setTitle("Review Order");
+            stage.show();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+	}
+	
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 }
