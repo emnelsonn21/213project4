@@ -50,6 +50,10 @@ public class Pizza {
 		return orderNumber;
 	}
 	
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
+	}
+	
 	public Size getSize() {
 		return size;
 	}
