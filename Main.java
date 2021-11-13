@@ -21,19 +21,18 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 		AnchorPane root = new AnchorPane();
 		try {
-
-			root = (AnchorPane)FXMLLoader.load(getClass().getResource("View.fxml"));
-			Scene scene = new Scene(root,675,538);
-			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-			primaryStage.setScene(scene);
-			primaryStage.setTitle("RU Pizzeria");
-			primaryStage.show();
 			
 			makeStoreOrders();
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("View.fxml"));
+			FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("View.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
-            MainController mainCont = fxmlLoader.getController();    
+            MainController mainCont = fxmlLoader.getController();
+ 
             mainCont.setStoreOrders(storeOrders);
+            
+            Stage stage = new Stage();
+            stage.setScene(new Scene(root1));  
+            stage.setTitle("RU Pizzeria");
+            stage.show();
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
