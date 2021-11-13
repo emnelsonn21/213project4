@@ -89,6 +89,7 @@ public class Order {
 		return null;
 	}
 	
+	
 	public Pizza[] getAllPizzasForOneOrder() {
 		// a customer with a given order number is going to click view pizzas
 		//print every pizza with that order number
@@ -97,6 +98,7 @@ public class Order {
 		
 		return pizzas;
 	}
+	
 	public int findEmptySpot() {
 		for (int i = 0; i < pizzas.length; i++) {
 			if (pizzas[i] == null) {
@@ -105,8 +107,26 @@ public class Order {
 		}
 		return -1;
 	}
+
 	
 	public String getOrderNumber() {
 		return orderNumber;
+	}
+	
+	public String getPizzas() {
+		String str = "";
+		for (int i = 0; i < size; i++) {
+			str = str + "\n" +pizzas[i].toString();
+		}
+		
+		return str;
+	}
+	
+	public Pizza[] getArrOfPizzas() {
+		Pizza[] pizzasRightSize = new Pizza[size];
+		for (int i = 0; i < size; i++) {
+			pizzasRightSize[i] = this.pizzas[i];
+		}
+		return pizzasRightSize;
 	}
 }
