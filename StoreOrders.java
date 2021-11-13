@@ -1,9 +1,13 @@
 package application;
 
-public class StoreOrders {
+import java.io.PrintWriter;
+import java.io.File;
+import java.io.IOException;
 
+public class StoreOrders {
+	
 	private Order[] allOrders;
-	int size;
+	private int size;
 	
 	public int find(Order order) {
 		for (int index = 0; index < size; index++) {
@@ -36,7 +40,26 @@ public class StoreOrders {
 	}
 	
 	public void export() {
-		
+		try {
+			File textFile = new File("StoreOrders.txt");
+			
+			textFile.createNewFile();
+			
+			PrintWriter storeOrders = new PrintWriter("StoreOrders.txt");
+			
+			for (int index = 0; index < size; index++) {
+				storeOrders.println(allOrders[index].getOrderNumber());
+					
+					for(int pizzaIndex = 0; pizzaIndex < allOrders[index].getSize(); pizzaIndex++) {
+						storeOrders.println("\t" + allOrders[index].getAllPizzasForOneOrder()[pizzaIndex].toString());
+					}
+			}
+			
+			storeOrders.close();
+		}catch (IOException e) {
+			//e.printStackTrace();
+		}
+			
 	}
 	
 	public int findEmptySpot() {
