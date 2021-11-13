@@ -2,6 +2,9 @@ package application;
 
 public class Deluxe extends Pizza {
 
+	public Deluxe() {
+		
+	}
 	public Deluxe(String orderNumber, Size size, Toppings[] toppings, double price) {
 		super(orderNumber, size, toppings, price);
 	}
@@ -29,8 +32,6 @@ public class Deluxe extends Pizza {
 			}
 		}
 
-		
-		System.out.println(price);
 		this.setPrice(price);
 	}
 	
