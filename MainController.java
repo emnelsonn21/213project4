@@ -23,7 +23,7 @@ import javafx.stage.Stage;
 
 public class MainController {
 	
-	Orders orders = new Orders();
+	Order orders = new Order();
 	public void makeOrders() {
 		Pizza[] newOrders = new Pizza[4];
 		orders.setPizzas(newOrders);
