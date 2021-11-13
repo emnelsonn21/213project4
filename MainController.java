@@ -73,7 +73,7 @@ public class MainController {
 	    		Stage newStage = new Stage();
 		    	VBox popup = new VBox();
 	    		if (!isValidPhone) {
-	    			Label notConfirmed = new Label("\n\n\t\tInvalid Phone number. Please try again.");
+	    			Label notConfirmed = new Label("\n\n\tInvalid Phone number. Please try again.");
 			    	popup.getChildren().add(notConfirmed);
 			    	Scene stageScene = new Scene(popup, 250, 100);
 			    	newStage.setScene(stageScene);
