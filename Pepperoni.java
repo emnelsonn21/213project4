@@ -1,10 +1,15 @@
 package application;
+
+import java.text.DecimalFormat;
+
 /**
 This class defines the type Pepperoni, which is an extenstion of Pizza, with all of its attributes and methods
 @author Emily Nelson, Cristofer Gomez-Martinez
 */
 public class Pepperoni extends Pizza {
-	
+
+	private String orderNumber;
+	private double thePrice;
 	/**
 	Empty constructor for a Pepperoni pizza
 	@author Emily Nelson
@@ -13,25 +18,13 @@ public class Pepperoni extends Pizza {
 		
 	}
 	
-	/**
-	Constructor for a Pepperoni pizza
-	Creates a type Pizza for this student
-	@param orderNumber the order number to set 
-	@param size the size of pizza to set
-	@param toppings the toppings of the pizza to set
-	@param price the price of the pizza to set
-	@author Emily Nelson
-	*/
-	public Pepperoni(String orderNumber, Size size, Toppings[] toppings, double price) {
-		super(orderNumber, size, toppings, price);
-	}
 	
 	/**
 	Calculates the price of a Pepperoni pizza
 	@author Emily Nelson
 	*/
 	@Override
-	public void calculatePrice() {
+	public double price() {
 		double price = 0;
 		
 		if (String.valueOf(this.getSize()).equals("SMALL")) {
@@ -42,8 +35,8 @@ public class Pepperoni extends Pizza {
 			price = 12.99;
 		}
 		
-		if (this.getNoToppings() > 1) {
-			int i = this.getNoToppings() - 1;
+		if (this.toppings.size() > 1) {
+			int i = this.toppings.size() - 1;
 			while (i > 0) {
 				price += 1.49;
 				i--;
@@ -51,7 +44,13 @@ public class Pepperoni extends Pizza {
 			}
 		}
 
+		DecimalFormat df = new DecimalFormat("0.00");
+    	
+    	price = Double.valueOf(df.format(price));
+
 		this.setPrice(price);
+		
+		return price;
 	}
 	
 	/**
@@ -62,6 +61,17 @@ public class Pepperoni extends Pizza {
 	@Override
 	public String toString() {
 		String str = super.toString();
-		return str + " : PEPPERONI";
+		return "PEPPERONI : " + str;
 	}
+	
+	
+	/**
+	 * Sets price of pizza
+	 * @param price
+	 * @author Emily Nelson
+	 */
+	public void setPrice(double price) {
+		this.thePrice = price;
+	}
+	
 }
