@@ -8,7 +8,10 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
-
+/**
+This class contains the main method that runs the software
+@author Emily Nelson, Cristofer Gomez-Martinez
+*/
 public class Main extends Application {
 	
     public StoreOrders storeOrders = new StoreOrders();
