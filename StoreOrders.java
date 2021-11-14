@@ -1,13 +1,13 @@
 package application;
 
-import java.io.PrintWriter;
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 public class StoreOrders {
-	
+
 	private Order[] allOrders;
-	private int size;
+	int size;
 	
 	public int find(Order order) {
 		for (int index = 0; index < size; index++) {
@@ -70,6 +70,13 @@ public class StoreOrders {
 		}
 		return -1;
 	}
+	
+	public void printAllOrders() {
+		for (int i = 0; i < size; i++) {
+			System.out.println(allOrders[i].getPizzas());
+		}
+	}
+	
 	
 	public Order[] getAllOrders() {
 		return this.allOrders;
