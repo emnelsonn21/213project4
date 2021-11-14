@@ -22,6 +22,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+This class contains the methods that organize the Main Menu user inputs
+@author Emily Nelson, Cristofer Gomez-Martinez
+*/
 public class MainController {
 
     @FXML
@@ -56,6 +60,11 @@ public class MainController {
     
     //only need to make an order when it's a new customer - different custID
     Order order = new Order();
+    
+    /**
+    Creates a new Order of pizzas
+    @author Emily Nelson
+    */
     public void makeNewOrder() {
     	Pizza[] newOrders = new Pizza[10];
     	order.setPizzas(newOrders);
@@ -65,7 +74,11 @@ public class MainController {
     @FXML
     private StoreOrders storeOrders;
     
- 
+    /**
+    Confirms if order has been started
+    @param event
+    @author Emily Nelson
+    */
     public void showConfirmation(KeyEvent event) throws Exception {
     	if(event.getCode().equals(KeyCode.ENTER)) {
     		
@@ -97,7 +110,12 @@ public class MainController {
 	    	}
     	}
     }
-
+    
+    /**
+    Opens up the Deluxe ordering page
+    @param event
+    @author Emily Nelson
+    */
     public void openDeluxeOrderPage(ActionEvent event) throws Exception { 
     	if (custID.equals("")) {
     		try {
@@ -133,6 +151,11 @@ public class MainController {
         }
     }
     
+    /**
+    Opens up the Hawaiian ordering page
+    @param event
+    @author Emily Nelson
+    */
     public void openHawaiianOrderPage(ActionEvent event) throws Exception { 
     	if (custID.equals("")) {
     		try {
@@ -167,6 +190,11 @@ public class MainController {
         }
     }
     
+    /**
+    Opens up the Pepperoni ordering page
+    @param event
+    @author Emily Nelson
+    */
     public void openPepperoniOrderPage(ActionEvent event) throws Exception {  
     	if (custID.equals("")) {
     		try {
@@ -200,6 +228,12 @@ public class MainController {
         }
     }
     
+    /**
+    Checks if valid phone number has been entered
+    @param entry phone number that was entered
+    @return true if phone number is valid, false otherwise
+    @author Emily Nelson
+    */
     private boolean isValidTelephoneNumber(String entry) {
     	if (entry.length() != 10) {
     		return false;
@@ -214,6 +248,11 @@ public class MainController {
     	return true;
     }
     
+    /**
+    Opens View Order Page
+    @param event
+    @author Emily Nelson
+    */
     public void openViewOrderPage(ActionEvent event) {
     	//AnchorPane root = new AnchorPane();
         try {
@@ -233,12 +272,22 @@ public class MainController {
             e.printStackTrace();
         }
 	}
-    
+    	
+	/**
+	Sets the store orders to new store oders
+	@param storeOrders the new store orders due to set 
+	@author Emily Nelson
+	*/
 	public void setStoreOrders(StoreOrders storeOrders) {
 		this.storeOrders = storeOrders;
 		System.out.println("Set for main. Length of allOrders is " + this.storeOrders.getAllOrders().length);
 	}
 	
+	/**
+	Adds an order into the store orders
+	@param order order to add
+	@author Emily Nelson
+	*/
 	public void addToStoreOrders(Order order) {
 		storeOrders.addToOrders(order);
 	}
