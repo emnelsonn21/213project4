@@ -442,7 +442,7 @@ public class OrderController {
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
     	int i = top.indexOf("Mushrooms");
-    	top = top.substring(0, i) + top.substring(i+8, endIndex);
+    	top = top.substring(0, i) + top.substring(i+10, endIndex);
     	txtSelectedToppings.setText(top);
     	
     	mushroomAdd.setDisable(false);
@@ -517,12 +517,12 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removeHam(ActionEvent e) {
-    	thePizza.toppings.remove(Toppings.MUSHROOMS);
+    	thePizza.toppings.remove(Toppings.HAM);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
     	int i = top.indexOf("Ham");
-    	top = top.substring(0, i) + top.substring(i+8, endIndex);
+    	top = top.substring(0, i) + top.substring(i+4, endIndex);
     	txtSelectedToppings.setText(top);
     	
     	hamAdd.setDisable(false);
@@ -537,12 +537,12 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removePineapple(ActionEvent e) {
-    	thePizza.toppings.remove(Toppings.MUSHROOMS);
+    	thePizza.toppings.remove(Toppings.PINEAPPLE);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
     	int i = top.indexOf("Pineapple");
-    	top = top.substring(0, i) + top.substring(i+8, endIndex);
+    	top = top.substring(0, i) + top.substring(i+10, endIndex);
     	txtSelectedToppings.setText(top);
     	
     	pineappleAdd.setDisable(false);
@@ -557,12 +557,12 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removePepperoni(ActionEvent e) {
-    	thePizza.toppings.remove(Toppings.MUSHROOMS);
+    	thePizza.toppings.remove(Toppings.PEPPERONI);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
     	int i = top.indexOf("Pepperoni");
-    	top = top.substring(0, i) + top.substring(i+9, endIndex);
+    	top = top.substring(0, i) + top.substring(i+10, endIndex);
     	txtSelectedToppings.setText(top);
     	
     	pepperoniAdd.setDisable(false);
