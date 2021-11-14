@@ -27,9 +27,9 @@ public class Pepperoni extends Pizza {
 	public double price() {
 		double price = 0;
 		
-		if (String.valueOf(this.getSize()).equals("SMALL")) {
+		if (String.valueOf(this.size).equals("SMALL")) {
 			price = 8.99;
-		} else if (String.valueOf(this.getSize()).equals("MEDIUM")) {
+		} else if (String.valueOf(this.size).equals("MEDIUM")) {
 			price = 10.99;
 		} else {
 			price = 12.99;
@@ -48,7 +48,7 @@ public class Pepperoni extends Pizza {
     	
     	price = Double.valueOf(df.format(price));
 
-		this.setPrice(price);
+		this.thePrice = price;
 		
 		return price;
 	}
@@ -62,16 +62,6 @@ public class Pepperoni extends Pizza {
 	public String toString() {
 		String str = super.toString();
 		return "PEPPERONI : " + str;
-	}
-	
-	
-	/**
-	 * Sets price of pizza
-	 * @param price
-	 * @author Emily Nelson
-	 */
-	public void setPrice(double price) {
-		this.thePrice = price;
 	}
 	
 }
