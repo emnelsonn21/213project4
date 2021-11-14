@@ -2,14 +2,13 @@ package application;
 
 import java.text.DecimalFormat;
 
-public class Pizza {
+public abstract class Pizza {
 	
 	public void calculatePrice() {
 	}
 
 	private String orderNumber;
 	private Size size;
-	//private Type type;
 	private Toppings[] toppings;
 	private int noToppings;
 	private double price;
