@@ -25,9 +25,10 @@ public class Order {
 	@return the index of the pizza if found, -1 otherwise
 	@author Emily Nelson
 	*/
+	
 	private int find(Pizza pizza) {
 		for (int index = 0; index < size; index++) {
-			if (pizza.getOrderNumber().equals(pizzas[index].getOrderNumber())) {
+			if (pizza.size == pizzas[index].size && pizza.toppings.equals(pizzas[index].toppings)) {
 				return index;
 			}
 		}
@@ -47,6 +48,7 @@ public class Order {
 		return true;
 	}
 	
+	
 	/**
 	Checks if a pizza can be removed from the Pizza array
 	Removes pizza from Pizza array if pizza is found
@@ -55,10 +57,8 @@ public class Order {
 	@return true if pizza is in Pizza array, false otherwise
 	@author Emily Nelson
 	*/
+	
 	public boolean remove(Pizza pizza) {
-		if (find(pizza) == -1) {
-			return false;
-		}
 		
 		int index = find(pizza);
 		pizzas[index] = null;
@@ -73,8 +73,11 @@ public class Order {
 			pizzas[index] = null;
 		}
 		
+		printOrder();
+		
 		return true;
 	}
+	
 	
 	/**
 	Sets the Pizza array to a new Pizza array
@@ -105,42 +108,13 @@ public class Order {
 		}
 	}
 	
-	/**
-	Gets the pizza that is being looked for from the Pizza array
-	@param pizza the pizza being looked for
-	@return the index of the pizza if found, null otherwise
-	@author Emily Nelson
-	*/
-	public Pizza getPizza(Pizza pizza) {
-		Pizza foundPiz = new Pizza();
-		int i = find(pizza);
-		
-		if (i != -1) {
-			foundPiz = pizzas[i];
-			if (foundPiz instanceof Deluxe) {
-				Deluxe del = (Deluxe) foundPiz;
-				return del;
-			} 
-			if (foundPiz instanceof Hawaiian) {
-				Hawaiian haw = (Hawaiian) foundPiz;
-				return haw;
-			}
-			if (foundPiz instanceof Pepperoni) {
-				Pepperoni pep = (Pepperoni) foundPiz;
-				return pep;
-			}
-		} 
-		return null;
-	}
 	
 	/**
 	Returns the array of pizzas for a given order
-        @return Pizza array
+    @return Pizza array
 	@author Emily Nelson 
 	*/
 	public Pizza[] getAllPizzasForOneOrder() {
-		// a customer with a given order number is going to click view pizzas
-		//print every pizza with that order number
 		
 		Pizza[] pizzas = new Pizza[size];
 		
