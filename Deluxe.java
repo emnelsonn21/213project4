@@ -51,7 +51,7 @@ public class Deluxe extends Pizza {
     	
     	price = Double.valueOf(df.format(price));
 
-		this.setPrice(price);
+		this.thePrice = price;
 		return price;
 	}
 	
@@ -65,15 +65,5 @@ public class Deluxe extends Pizza {
 		String str = super.toString();
 		return "DELUXE : " + str;
 	}
-	
-	/**
-	 * Sets price of pizza
-	 * @param price
-	 * @author Emily Nelson
-	 */
-	public void setPrice(double price) {
-		this.thePrice = price;
-	}
-	
-	
+
 }
