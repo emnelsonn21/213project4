@@ -49,7 +49,7 @@ public class Hawaiian extends Pizza {
     	
     	price = Double.valueOf(df.format(price));
 
-		this.setPrice(price);
+		this.thePrice = price;
 		
 		return price;
 	}
@@ -65,13 +65,4 @@ public class Hawaiian extends Pizza {
 		return "HAWAIIAN : " + str;
 	}
 	
-	/**
-	 * Sets price of pizza
-	 * @param price
-	 * @author Emily Nelson
-	 */
-	public void setPrice(double price) {
-		this.thePrice = price;
-	}
-
 }
