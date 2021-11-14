@@ -28,9 +28,9 @@ public class Hawaiian extends Pizza {
 		
 		//small is $10.99, medium is $12.99, large is $14.99
 		//$1.49 for each additional topping, up to 2 toppings
-		if (String.valueOf(this.getSize()).equals("SMALL")) {
+		if (String.valueOf(this.size).equals("SMALL")) {
 			price = 10.99;
-		} else if (String.valueOf(this.getSize()).equals("MEDIUM")) {
+		} else if (String.valueOf(this.size).equals("MEDIUM")) {
 			price = 12.99;
 		} else {
 			price = 14.99;
