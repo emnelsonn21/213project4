@@ -517,7 +517,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removeHam(ActionEvent e) {
-    	thePizza.toppings.remove(Toppings.MUSHROOMS);
+    	thePizza.toppings.remove(Toppings.HAM);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
@@ -537,7 +537,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removePineapple(ActionEvent e) {
-    	thePizza.toppings.remove(Toppings.MUSHROOMS);
+    	thePizza.toppings.remove(Toppings.PINEAPPLE);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
@@ -557,7 +557,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removePepperoni(ActionEvent e) {
-    	thePizza.toppings.remove(Toppings.MUSHROOMS);
+    	thePizza.toppings.remove(Toppings.PEPPERONI);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
