@@ -20,6 +20,11 @@ public class Main extends Application {
     	 storeOrders.setAllOrders(allOrders);
     }
     
+    /**
+     * This method opens the stage
+     * @param the primary stage
+     * @author Emily Nelson
+     */
 	@Override
 	public void start(Stage primaryStage) {
 		AnchorPane root = new AnchorPane();
@@ -41,6 +46,11 @@ public class Main extends Application {
 		}
 	}
 	
+	/**
+	 * This is the main method that runs the software
+	 * @param args
+	 * @author Emily Nelson
+	 */
 	public static void main(String[] args) {
 		launch(args);
 	}
