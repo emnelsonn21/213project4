@@ -1,10 +1,22 @@
 package application;
-
+/**
+This class defines the type Hawaiian, which is an extenstion of Pizza, with all of its attributes and methods
+@author Emily Nelson, Cristofer Gomez-Martinez
+*/
 public class Hawaiian extends Pizza {
-
+	
+	/**
+	Empty constructor for a Hawaiian pizza
+	@author Emily Nelson
+	*/
 	public Hawaiian() {
 		
 	}
+	
+	/**
+	Calculates the price of a Hawaiian pizza
+	@author Emily Nelson
+	*/
 	@Override
 	public void calculatePrice() {
 		double price = 0;
@@ -30,6 +42,12 @@ public class Hawaiian extends Pizza {
 
 		this.setPrice(price);
 	}
+	
+	/**
+	Returns the pizza in string form
+	@return textual represential of pizza 
+	@author Emily Nelson
+	*/
 	@Override 
 	public String toString() {
 		String str = super.toString();
