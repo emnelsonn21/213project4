@@ -738,7 +738,7 @@ public class OrderController {
 	
 	/**
 	Sets the store orders to new store oders
-	@param storeOrders the new store orders due to set 
+	@param storeOrders the new store orders to set 
 	@author Emily Nelson
 	*/
 	public void setTheStoreOrders(StoreOrders storeOrders) {
