@@ -23,6 +23,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+This class contains the methods that organize the user Order inputs
+@author Emily Nelson, Cristofer Gomez-Martinez
+*/
 public class OrderController {
 	
     @FXML
@@ -136,10 +140,21 @@ public class OrderController {
     private AnchorPane scenePane;
     
     private String orderNum;
- 
+    
+    /**
+    Returns the number of order
+    @return order number
+    @author Emily Nelson 
+    */
     public String getOrderNum() {
     	return orderNum;
     }
+	
+    /**
+    Sets the order number to given order number
+    @param orderNum the order number to set
+    @author Emily Nelson
+    */
     public void setOrderNum(String orderNum) {
     	this.orderNum = orderNum;
     }
@@ -151,6 +166,10 @@ public class OrderController {
    
     Pizza thePizza = new Pizza();
     
+    /**
+    Sets up the Deluxe ordering page
+    @author Emily Nelson
+    */
     public void setPicDeluxe() {
     	Toppings[] defaultDeluxeToppings = new Toppings[]{Toppings.SAUSAGE, Toppings.MUSHROOMS, Toppings.ARTICHOKES, Toppings.ONIONS, Toppings.OLIVES, null, null};
     	thePizza = PizzaMaker.createPizza("Deluxe");
@@ -177,18 +196,35 @@ public class OrderController {
 
     }
     
+    /**
+    Sets up the Hawaiian ordering page
+    @author Emily Nelson
+    */		
     public void setPicHawaiian() {
     	imgOrder.setImage(hawaiianImage);
     	
     }
     
+    /**
+    Sets up the Pepperoni ordering page
+    @author Emily Nelson
+    */
     public void setPicPepperoni() {
     	imgOrder.setImage(pepperoniImage);
     }
     
+    /**
+    Changes pizza size to Small
+    @author Emily Nelson
+    */	
     public void changeToSmall(ActionEvent e) {
     	mnuSize.setText("Small");
     }
+	
+    /**
+    Changes pizza size to Medium
+    @author Emily Nelson
+    */	
     public void changeToMedium(ActionEvent e) {
     	mnuSize.setText("Medium");
     	
@@ -199,6 +235,10 @@ public class OrderController {
     	
     }
     
+    /**
+    Changes pizza size to Large
+    @author Emily Nelson
+    */	
     public void changeToLarge(ActionEvent e) {
     	mnuSize.setText("Large");
     	Pizza newPizza = new Pizza(orderNum);
@@ -211,7 +251,11 @@ public class OrderController {
     	txtPrice.setText(String.valueOf(foundPizza.getPrice()));
     }
     
-    
+    /**
+    Adds Sausage to pizza
+    Does nothing if sausage is on pizza already
+    @author Emily Nelson
+    */	
     public void addSausage(ActionEvent e) {
       	thePizza.setNoToppings(thePizza.getNoToppings() + 1);
       	if (!checkToppings(thePizza.getNoToppings())) return;
@@ -225,7 +269,11 @@ public class OrderController {
     	txtPrice.setText(String.valueOf(thePizza.getPrice()));
     }
     
-    
+    /**
+    Adds Mushroom to pizza
+    Does nothing if mushroom is on pizza already
+    @author Emily Nelson
+    */	
     public void addMushroom(ActionEvent e) {
       	thePizza.setNoToppings(thePizza.getNoToppings() + 1);
       	if (!checkToppings(thePizza.getNoToppings())) return;
@@ -239,6 +287,11 @@ public class OrderController {
     	txtPrice.setText(String.valueOf(thePizza.getPrice()));
     }
     
+    /**
+    Adds Artichoke to pizza
+    Does nothing if Artichoke is on pizza already
+    @author Emily Nelson
+    */	
     public void addArtichoke(ActionEvent e) {
       	thePizza.setNoToppings(thePizza.getNoToppings() + 1);
       	if (!checkToppings(thePizza.getNoToppings())) return;
@@ -252,6 +305,11 @@ public class OrderController {
     	txtPrice.setText(String.valueOf(thePizza.getPrice()));
     }
     
+    /**
+    Adds Onions to pizza
+    Does nothing if onions is on pizza already
+    @author Emily Nelson
+    */	
     public void addOnions(ActionEvent e) {
       	thePizza.setNoToppings(thePizza.getNoToppings() + 1);
       	if (!checkToppings(thePizza.getNoToppings())) return;
@@ -265,6 +323,11 @@ public class OrderController {
     	txtPrice.setText(String.valueOf(thePizza.getPrice()));
     }
     
+    /**
+    Adds Olives to pizza
+    Does nothing if olives is on pizza already
+    @author Emily Nelson
+    */	
     public void addOlives(ActionEvent e) {
       	thePizza.setNoToppings(thePizza.getNoToppings() + 1);
       	if (!checkToppings(thePizza.getNoToppings())) return;
@@ -278,6 +341,11 @@ public class OrderController {
     	txtPrice.setText(String.valueOf(thePizza.getPrice()));
     }
     
+    /**
+    Adds Ham to pizza
+    Does nothing if ham is on pizza already
+    @author Emily Nelson
+    */	
     public void addHam(ActionEvent e) {
       	thePizza.setNoToppings(thePizza.getNoToppings() + 1);
       	if (!checkToppings(thePizza.getNoToppings())) return;
@@ -291,6 +359,11 @@ public class OrderController {
     	txtPrice.setText(String.valueOf(thePizza.getPrice()));
     }
     
+    /**
+    Adds Pineapple to pizza
+    Does nothing if pineapple is on pizza already
+    @author Emily Nelson
+    */	
     public void addPineapple(ActionEvent e) {
       	thePizza.setNoToppings(thePizza.getNoToppings() + 1);
       	if (!checkToppings(thePizza.getNoToppings())) return;
@@ -304,6 +377,11 @@ public class OrderController {
     	txtPrice.setText(String.valueOf(thePizza.getPrice()));
     }
    
+    /**
+    Adds Pepperoni to pizza
+    Does nothing if pepperoni is on pizza already
+    @author Emily Nelson
+    */	
     public void addPepperoni(ActionEvent e) {
       	thePizza.setNoToppings(thePizza.getNoToppings() + 1);
       	if (!checkToppings(thePizza.getNoToppings())) return;
@@ -318,7 +396,11 @@ public class OrderController {
     }
     
 
-    
+    /**
+    Removes Sausage from pizza
+    Does nothing if sausage is not on pizza 
+    @author Emily Nelson
+    */	
     public void removeSausage(ActionEvent e) { 	
     	thePizza.setNoToppings(thePizza.getNoToppings() - 1);
     	int index = findTopping(thePizza.getToppings(), Toppings.SAUSAGE);
@@ -342,7 +424,11 @@ public class OrderController {
     }
     
 
-    
+    /**
+    Removes Mushroom from pizza
+    Does nothing if mushroom is not on pizza 
+    @author Emily Nelson
+    */
     public void removeMushroom(ActionEvent e) {
     	thePizza.setNoToppings(thePizza.getNoToppings() - 1);
     	int index = findTopping(thePizza.getToppings(), Toppings.MUSHROOMS);
@@ -365,7 +451,11 @@ public class OrderController {
     	txtPrice.setText(String.valueOf(thePizza.getPrice()));
     }
     
-    
+    /**
+    Removes Artichoke from pizza
+    Does nothing if Artichoke is not on pizza 
+    @author Emily Nelson
+    */
     public void removeArtichoke(ActionEvent e) {
     	thePizza.setNoToppings(thePizza.getNoToppings() - 1);
     	int index = findTopping(thePizza.getToppings(), Toppings.ARTICHOKES);
@@ -388,6 +478,11 @@ public class OrderController {
     	txtPrice.setText(String.valueOf(thePizza.getPrice()));
     }
     
+    /**
+    Removes Onions from pizza
+    Does nothing if onions is not on pizza 
+    @author Emily Nelson
+    */
     public void removeOnions(ActionEvent e) {
     	thePizza.setNoToppings(thePizza.getNoToppings() - 1);
     	int index = findTopping(thePizza.getToppings(), Toppings.ONIONS);
@@ -410,6 +505,11 @@ public class OrderController {
     	txtPrice.setText(String.valueOf(thePizza.getPrice()));
     }
     
+    /**
+    Removes Olives from pizza
+    Does nothing if olives is not on pizza 
+    @author Emily Nelson
+    */
     public void removeOlives(ActionEvent e) {
     	thePizza.setNoToppings(thePizza.getNoToppings() - 1);
     	int index = findTopping(thePizza.getToppings(), Toppings.OLIVES);
@@ -432,6 +532,11 @@ public class OrderController {
     	txtPrice.setText(String.valueOf(thePizza.getPrice()));
     }
     
+    /**
+    Removes Ham from pizza
+    Does nothing if ham is not on pizza 
+    @author Emily Nelson
+    */
     public void removeHam(ActionEvent e) {
     	thePizza.setNoToppings(thePizza.getNoToppings() - 1);
     	int index = findTopping(thePizza.getToppings(), Toppings.HAM);
@@ -454,6 +559,11 @@ public class OrderController {
     	txtPrice.setText(String.valueOf(thePizza.getPrice()));
     }
     
+    /**
+    Removes Pineapple from pizza
+    Does nothing if pineapple is not on pizza 
+    @author Emily Nelson
+    */
     public void removePineapple(ActionEvent e) {
     	thePizza.setNoToppings(thePizza.getNoToppings() - 1);
     	int index = findTopping(thePizza.getToppings(), Toppings.PINEAPPLE);
@@ -476,6 +586,11 @@ public class OrderController {
     	txtPrice.setText(String.valueOf(thePizza.getPrice()));
     }
     
+    /**
+    Removes Pepperoni from pizza
+    Does nothing if pepperoni is not on pizza 
+    @author Emily Nelson
+    */
     public void removePepperoni(ActionEvent e) {
     	thePizza.setNoToppings(thePizza.getNoToppings() - 1);
     	int index = findTopping(thePizza.getToppings(), Toppings.PEPPERONI);
@@ -518,6 +633,12 @@ public class OrderController {
     }
     */
     
+    /**
+    Checks if pizza has more than 7 toppings
+    @param numToppings the number of toppings
+    @return true if pizza has no more than 7 toppings, false otherwise
+    @author Emily Nelson
+    */
     public boolean checkToppings(int numToppings) {
     	if (numToppings > 7) {
     		try {
@@ -538,7 +659,13 @@ public class OrderController {
     	return true;
     }
 
-    
+    /**
+    Finds the index where the topping is located in the Toppings array
+    @param toppings the Toppings array being looked through
+    @param topping the topping being looked for
+    @return the index of the topping if found, -1 otherwise
+    @author Emily Nelson
+    */
     public int findTopping(Toppings[] toppings, Toppings topping) {
     	for (int i = 0; i < 7; i++) {
     		if (toppings[i] == topping) {
@@ -549,6 +676,12 @@ public class OrderController {
     	return -1;
     }
     
+    /**
+    Moves the toppings down in the Toppings array of a certain pizza
+    @param foundPizza the pizza whose Toppings array we should move down
+    @param index the index to start moving the toppings in Toppings array down
+    @author Emily Nelson
+    */
     public void moveDown(Pizza foundPizza, int index) {
 		while (index < 6) {
 			foundPizza.getToppings()[index] = foundPizza.getToppings()[index+1];
@@ -557,7 +690,13 @@ public class OrderController {
 		
 		foundPizza.getToppings()[index] = null;
     }
-    
+    	
+	/**
+	Finds the first empty index/spot in the Toppings array
+	@param toppings the Toppings array where the empty spot is being looked for
+	@return the index if an empty spot is found, -1 otherwise
+	@author Emily Nelson
+	*/
 	public int findEmptySpotToppings(Toppings[] toppings) {
 		for (int i = 0; i < toppings.length; i++) {
 			if (toppings[i] == null) {
@@ -569,6 +708,13 @@ public class OrderController {
 	
 
 	private Order[] allOrders;
+	
+	/**
+	Adds pizza to order
+	Adds pizza to store orders
+	@param event
+	@author Emily Nelson
+	*/
 	public void addToOrder(ActionEvent e) {
 		stage = (Stage) scenePane.getScene().getWindow();
 		order.add(thePizza);
@@ -590,9 +736,20 @@ public class OrderController {
 		stage.close();
 	}
 	
+	/**
+	Sets the store orders to new store oders
+	@param storeOrders the new store orders due to set 
+	@author Emily Nelson
+	*/
 	public void setTheStoreOrders(StoreOrders storeOrders) {
 		this.storeOrders = storeOrders;
 	}
+	
+	/**
+	Sets the order to new order
+	@param order the new order to set 
+	@author Emily Nelson
+	*/
 	public void setOrder(Order order) {
 		this.order = order;
 	}
