@@ -298,7 +298,7 @@ public class OrderController {
     */
     public void addSausage(ActionEvent e) {
       	if (!checkToppings(thePizza.toppings.size())) return;
-    	thePizza.getToppings().add(Toppings.SAUSAGE);
+    	thePizza.toppings.add(Toppings.SAUSAGE);
     	txtSelectedToppings.appendText("Sausage\n");
     	sausageAdd.setDisable(true);
     	sausageRemove.setDisable(false);
@@ -313,7 +313,7 @@ public class OrderController {
     */
     public void addMushroom(ActionEvent e) {
       	if (!checkToppings(thePizza.toppings.size())) return;
-      	thePizza.getToppings().add(Toppings.MUSHROOMS);
+      	thePizza.toppings.add(Toppings.MUSHROOMS);
     	txtSelectedToppings.appendText("Mushrooms\n");
     	mushroomAdd.setDisable(true);
     	mushroomRemove.setDisable(false);
@@ -328,7 +328,7 @@ public class OrderController {
     */
     public void addArtichoke(ActionEvent e) {
       	if (!checkToppings(thePizza.toppings.size())) return;
-      	thePizza.getToppings().add(Toppings.ARTICHOKES);
+      	thePizza.toppings.add(Toppings.ARTICHOKES);
     	txtSelectedToppings.appendText("Artichoke Hearts\n");
     	artichokeAdd.setDisable(true);
     	artichokeRemove.setDisable(false);
@@ -343,7 +343,7 @@ public class OrderController {
     */
     public void addOnions(ActionEvent e) {
       	if (!checkToppings(thePizza.toppings.size())) return;
-      	thePizza.getToppings().add(Toppings.ONIONS);
+      	thePizza.toppings.add(Toppings.ONIONS);
     	txtSelectedToppings.appendText("Onions\n");
     	onionsAdd.setDisable(true);
     	onionsRemove.setDisable(false);
@@ -358,7 +358,7 @@ public class OrderController {
     */
     public void addOlives(ActionEvent e) {
       	if (!checkToppings(thePizza.toppings.size())) return;
-      	thePizza.getToppings().add(Toppings.OLIVES);
+      	thePizza.toppings.add(Toppings.OLIVES);
     	txtSelectedToppings.appendText("Olives\n");
     	olivesAdd.setDisable(true);
     	olivesRemove.setDisable(false);
@@ -373,7 +373,7 @@ public class OrderController {
     */
     public void addHam(ActionEvent e) {
       	if (!checkToppings(thePizza.toppings.size())) return;
-      	thePizza.getToppings().add(Toppings.HAM);
+      	thePizza.toppings.add(Toppings.HAM);
     	txtSelectedToppings.appendText("Ham\n");
     	hamAdd.setDisable(true);
     	hamRemove.setDisable(false);
@@ -388,7 +388,7 @@ public class OrderController {
     */
     public void addPineapple(ActionEvent e) {
       	if (!checkToppings(thePizza.toppings.size())) return;
-      	thePizza.getToppings().add(Toppings.PINEAPPLE);
+      	thePizza.toppings.add(Toppings.PINEAPPLE);
     	txtSelectedToppings.appendText("Pineapple\n");
     	pineappleAdd.setDisable(true);
     	pineappleRemove.setDisable(false);
@@ -403,7 +403,7 @@ public class OrderController {
     */
     public void addPepperoni(ActionEvent e) {
       	if (!checkToppings(thePizza.toppings.size())) return;
-      	thePizza.getToppings().add(Toppings.PEPPERONI);
+      	thePizza.toppings.add(Toppings.PEPPERONI);
     	txtSelectedToppings.appendText("Pepperoni\n");
     	pepperoniAdd.setDisable(true);
     	pepperoniRemove.setDisable(false);
@@ -417,7 +417,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removeSausage(ActionEvent e) { 	
-    	thePizza.getToppings().remove(Toppings.SAUSAGE);
+    	thePizza.toppings.remove(Toppings.SAUSAGE);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
@@ -437,7 +437,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removeMushroom(ActionEvent e) {
-    	thePizza.getToppings().remove(Toppings.MUSHROOMS);
+    	thePizza.toppings.remove(Toppings.MUSHROOMS);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
@@ -457,7 +457,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removeArtichoke(ActionEvent e) {
-    	thePizza.getToppings().remove(Toppings.ARTICHOKES);
+    	thePizza.toppings.remove(Toppings.ARTICHOKES);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
@@ -477,7 +477,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removeOnions(ActionEvent e) {
-    	thePizza.getToppings().remove(Toppings.ONIONS);
+    	thePizza.toppings.remove(Toppings.ONIONS);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
@@ -497,7 +497,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removeOlives(ActionEvent e) {
-    	thePizza.getToppings().remove(Toppings.OLIVES);
+    	thePizza.toppings.remove(Toppings.OLIVES);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
@@ -517,7 +517,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removeHam(ActionEvent e) {
-    	thePizza.getToppings().remove(Toppings.MUSHROOMS);
+    	thePizza.toppings.remove(Toppings.MUSHROOMS);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
@@ -537,7 +537,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removePineapple(ActionEvent e) {
-    	thePizza.getToppings().remove(Toppings.MUSHROOMS);
+    	thePizza.toppings.remove(Toppings.MUSHROOMS);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
@@ -557,7 +557,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removePepperoni(ActionEvent e) {
-    	thePizza.getToppings().remove(Toppings.MUSHROOMS);
+    	thePizza.toppings.remove(Toppings.MUSHROOMS);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
