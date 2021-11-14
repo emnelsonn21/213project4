@@ -1,9 +1,15 @@
 package application;
+
+import java.text.DecimalFormat;
+
 /**
 This class defines the type Deluxe, which is an extenstion of Pizza, with all of its attributes and methods
 @author Emily Nelson, Cristofer Gomez-Martinez
 */
 public class Deluxe extends Pizza {
+
+	private String orderNumber;
+	private double thePrice;
 	
 	/**
 	Empty constructor for a Deluxe pizza
@@ -12,26 +18,13 @@ public class Deluxe extends Pizza {
 	public Deluxe() {
 		
 	}
-	
-	/**
-	Constructor for a Deluxe pizza
-	Creates a type Pizza for this student
-	@param orderNumber the order number to set 
-	@param size the size of pizza to set
-	@param toppings the toppings of the pizza to set
-	@param price the price of the pizza to set
-	@author Emily Nelson
-	*/
-	public Deluxe(String orderNumber, Size size, Toppings[] toppings, double price) {
-		super(orderNumber, size, toppings, price);
-	}
-	
+
 	/**
 	Calculates the price of a Deluxe pizza
 	@author Emily Nelson
 	*/
 	@Override
-	public void calculatePrice() {
+	public double price() {
 		double price = 0;
 		
 		//small is $12.99, medium is $14.99, large is $16.99
@@ -44,8 +37,8 @@ public class Deluxe extends Pizza {
 			price = 16.99;
 		}
 		
-		if (this.getNoToppings() > 5) {
-			int i = this.getNoToppings() - 5;
+		if (this.toppings.size() > 5) {
+			int i = this.toppings.size() - 5;
 			while (i > 0) {
 				price += 1.49;
 				i--;
@@ -53,19 +46,33 @@ public class Deluxe extends Pizza {
 			}
 		}
 
+		DecimalFormat df = new DecimalFormat("0.00");
+    	
+    		price = Double.valueOf(df.format(price));
+
 		this.setPrice(price);
+		return price;
 	}
 	
 	/**
 	Returns the pizza in string form
-	@return textual represential of pizza 
+	@return textual representation of pizza 
 	@author Emily Nelson
 	*/
 	@Override
 	public String toString() {
 		String str = super.toString();
-		return str + " : DELUXE";
+		return "DELUXE : " + str;
 	}
 	
+	
+	/**
+	 * Sets price of pizza
+	 * @param price
+	 * @author Emily Nelson
+	 */
+	public void setPrice(double price) {
+		this.thePrice = price;
+	}
 	
 }
