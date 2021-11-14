@@ -12,6 +12,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class ReviewOrderController {
+	
+	static final double tax = 0.06625;
 
     @FXML
     private AnchorPane scenePane;
@@ -36,24 +38,12 @@ public class ReviewOrderController {
 	
     private String orderNum = "";
     
-    //need to get the order[] from OrderController and put it here
-    //use getPizzas method as a toString
-    Order[] allOrders;
+    private Order[] allOrders;
     
-    //also need to get storeOrders from main-->ordercont and assign allOrders to it
-    StoreOrders storeOrders;
-    
-    public void getAllOrders(Order[] allOrders) {
-    	this.allOrders = allOrders;
-    }
-    
-    public void takeOrderNum(String orderNum) {
-    	
-    	this.orderNum = orderNum;
-    }
+    private StoreOrders storeOrders;
     
     
-    public void fillOrderReviewList2(Order[] allOrders) {
+    protected void fillOrderReviewList2(Order[] allOrders) {
     	int i = findWithOrderNum(orderNum);
     	Pizza[] pizzas = new Pizza[allOrders[i].getSize()];
     	pizzas = allOrders[i].getArrOfPizzas();
@@ -62,7 +52,8 @@ public class ReviewOrderController {
     	txtTotalPrice.setText(String.valueOf(price));
     }
     
-    public void removeItem(ActionEvent event) {
+    @FXML
+    private void removeItem(ActionEvent event) {
     	int i = findWithOrderNum(orderNum);
     	Pizza pizza = orderReviewList.getSelectionModel().getSelectedItem();
     	allOrders[i].remove(pizza);
@@ -78,7 +69,7 @@ public class ReviewOrderController {
 		return -1;
     }
     
-    public double calculateTotalPrice() {
+    private double calculateTotalPrice() {
     	double price = 0;
     	int index = findWithOrderNum(orderNum);
     	int noPizzas = allOrders[index].getSize();
@@ -88,14 +79,14 @@ public class ReviewOrderController {
     		price += order.getArrOfPizzas()[i].price();
     	}
     	
-    	price = price + (price * .06625);
+    	price = price + (price * tax);
     	DecimalFormat df = new DecimalFormat("0.00");
     	
     	return Double.valueOf(df.format(price));
     }
     
-
-    public void placeOrder(ActionEvent event) {
+    @FXML
+    private void placeOrder(ActionEvent event) {
     	try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("View.fxml"));
             Parent root1 = (Parent) fxmlLoader.load();
@@ -108,7 +99,8 @@ public class ReviewOrderController {
     	stage.close();
     }
     
-    public void cancelOrder(ActionEvent event) {
+    @FXML
+    private void cancelOrder(ActionEvent event) {
     	int index = findWithOrderNum(orderNum);
     	allOrders[index] = null;
     	storeOrders.setSize(storeOrders.getSize() - 1);
@@ -119,4 +111,13 @@ public class ReviewOrderController {
 	public void settingStoreOrders(StoreOrders storeOrders) {
 		this.storeOrders = storeOrders;
 	}
+	
+    public void getAllOrders(Order[] allOrders) {
+    	this.allOrders = allOrders;
+    }
+    
+    public void takeOrderNum(String orderNum) {
+    	
+    	this.orderNum = orderNum;
+    }
 }
