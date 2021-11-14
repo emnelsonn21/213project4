@@ -18,7 +18,8 @@ public class Deluxe extends Pizza {
 	public Deluxe() {
 		
 	}
-
+	
+	
 	/**
 	Calculates the price of a Deluxe pizza
 	@author Emily Nelson
@@ -29,9 +30,9 @@ public class Deluxe extends Pizza {
 		
 		//small is $12.99, medium is $14.99, large is $16.99
 		//$1.49 for each additional topping, up to 7 toppings
-		if (String.valueOf(this.getSize()).equals("SMALL")) {
+		if (String.valueOf(this.size).equals("SMALL")) {
 			price = 12.99;
-		} else if (String.valueOf(this.getSize()).equals("MEDIUM")) {
+		} else if (String.valueOf(this.size).equals("MEDIUM")) {
 			price = 14.99;
 		} else {
 			price = 16.99;
@@ -48,7 +49,7 @@ public class Deluxe extends Pizza {
 
 		DecimalFormat df = new DecimalFormat("0.00");
     	
-    		price = Double.valueOf(df.format(price));
+    	price = Double.valueOf(df.format(price));
 
 		this.setPrice(price);
 		return price;
@@ -65,7 +66,6 @@ public class Deluxe extends Pizza {
 		return "DELUXE : " + str;
 	}
 	
-	
 	/**
 	 * Sets price of pizza
 	 * @param price
@@ -74,5 +74,6 @@ public class Deluxe extends Pizza {
 	public void setPrice(double price) {
 		this.thePrice = price;
 	}
+	
 	
 }
