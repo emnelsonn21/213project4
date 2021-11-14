@@ -8,8 +8,12 @@ This class defines the type Pepperoni, which is an extenstion of Pizza, with all
 */
 public class Pepperoni extends Pizza {
 
-	private String orderNumber;
-	private double thePrice;
+	static final double smallPrice = 8.99;
+	static final double medPrice = 10.99;
+	static final double largePrice = 12.99;
+	static final double toppingPrice = 1.49;
+	static final int defaultToppings = 1;
+	
 	/**
 	Empty constructor for a Pepperoni pizza
 	@author Emily Nelson
@@ -28,17 +32,17 @@ public class Pepperoni extends Pizza {
 		double price = 0;
 		
 		if (String.valueOf(this.size).equals("SMALL")) {
-			price = 8.99;
+			price = smallPrice;
 		} else if (String.valueOf(this.size).equals("MEDIUM")) {
-			price = 10.99;
+			price = medPrice;
 		} else {
-			price = 12.99;
+			price = largePrice;
 		}
 		
-		if (this.toppings.size() > 1) {
-			int i = this.toppings.size() - 1;
+		if (this.toppings.size() > defaultToppings) {
+			int i = this.toppings.size() - defaultToppings;
 			while (i > 0) {
-				price += 1.49;
+				price += toppingPrice;
 				i--;
 				
 			}
@@ -47,8 +51,6 @@ public class Pepperoni extends Pizza {
 		DecimalFormat df = new DecimalFormat("0.00");
     	
     	price = Double.valueOf(df.format(price));
-
-		this.thePrice = price;
 		
 		return price;
 	}
