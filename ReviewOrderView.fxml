@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane prefHeight="517.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ReviewOrderController">
@@ -13,5 +18,37 @@
          </font>
       </Label>
       <ListView fx:id="orderReviewList" layoutX="2.0" layoutY="100.0" prefHeight="241.0" prefWidth="405.0" />
+      <HBox layoutY="378.0" prefHeight="101.0" prefWidth="407.0">
+         <children>
+            <VBox prefHeight="101.0" prefWidth="198.0">
+               <children>
+                  <Button fx:id="btnRemoveItem" mnemonicParsing="false" onAction="#removeItem" text="Remove Selected Item">
+                     <VBox.margin>
+                        <Insets left="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button fx:id="btnAddItems" mnemonicParsing="false" text="Add More Item(s) to Order">
+                     <VBox.margin>
+                        <Insets left="10.0" top="40.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox prefHeight="101.0" prefWidth="167.0">
+               <children>
+                  <TextField fx:id="txtTotalPrice" editable="false" />
+                  <Button fx:id="btnPlaceOrder" mnemonicParsing="false" onAction="#placeOrder" text="Place Order">
+                     <VBox.margin>
+                        <Insets left="80.0" top="40.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+               <HBox.margin>
+                  <Insets left="40.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+      <Button fx:id="btnCancel" layoutX="160.0" layoutY="479.0" mnemonicParsing="false" onAction="#cancelOrder" text="Cancel Order" />
    </children>
 </AnchorPane>
