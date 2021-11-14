@@ -1,10 +1,15 @@
 package application;
+
+import java.text.DecimalFormat;
+
 /**
 This class defines the type Hawaiian, which is an extenstion of Pizza, with all of its attributes and methods
 @author Emily Nelson, Cristofer Gomez-Martinez
 */
 public class Hawaiian extends Pizza {
-	
+
+	private String orderNumber;
+	private double thePrice;
 	/**
 	Empty constructor for a Hawaiian pizza
 	@author Emily Nelson
@@ -18,7 +23,7 @@ public class Hawaiian extends Pizza {
 	@author Emily Nelson
 	*/
 	@Override
-	public void calculatePrice() {
+	public double price() {
 		double price = 0;
 		
 		//small is $10.99, medium is $12.99, large is $14.99
@@ -31,16 +36,22 @@ public class Hawaiian extends Pizza {
 			price = 14.99;
 		}
 		
-		if (this.getNoToppings() > 2) {
-			int i = this.getNoToppings() - 2;
+		if (this.toppings.size() > 2) {
+			int i = this.toppings.size() - 2;
 			while (i > 0) {
 				price += 1.49;
 				i--;
 				
 			}
 		}
+		
+		DecimalFormat df = new DecimalFormat("0.00");
+    	
+    	price = Double.valueOf(df.format(price));
 
 		this.setPrice(price);
+		
+		return price;
 	}
 	
 	/**
@@ -51,6 +62,16 @@ public class Hawaiian extends Pizza {
 	@Override 
 	public String toString() {
 		String str = super.toString();
-		return str + " : HAWAIIAN";
+		return "HAWAIIAN : " + str;
 	}
+	
+	/**
+	 * Sets price of pizza
+	 * @param price
+	 * @author Emily Nelson
+	 */
+	public void setPrice(double price) {
+		this.thePrice = price;
+	}
+
 }
