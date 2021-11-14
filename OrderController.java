@@ -3,6 +3,8 @@ package application;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -140,7 +142,7 @@ public class OrderController {
     private AnchorPane scenePane;
     
     private String orderNum;
-    
+ 
     /**
     Returns the number of order
     @return order number
@@ -149,7 +151,7 @@ public class OrderController {
     public String getOrderNum() {
     	return orderNum;
     }
-	
+    
     /**
     Sets the order number to given order number
     @param orderNum the order number to set
@@ -164,19 +166,23 @@ public class OrderController {
 	private StoreOrders storeOrders;
        
    
-    Pizza thePizza = new Pizza();
+    Pizza thePizza;
     
     /**
     Sets up the Deluxe ordering page
     @author Emily Nelson
     */
     public void setPicDeluxe() {
-    	Toppings[] defaultDeluxeToppings = new Toppings[]{Toppings.SAUSAGE, Toppings.MUSHROOMS, Toppings.ARTICHOKES, Toppings.ONIONS, Toppings.OLIVES, null, null};
+    	ArrayList<Toppings> defaultDeluxeToppings = new ArrayList<Toppings>();
+    	defaultDeluxeToppings.add(Toppings.SAUSAGE);
+    	defaultDeluxeToppings.add(Toppings.MUSHROOMS);
+    	defaultDeluxeToppings.add(Toppings.ARTICHOKES);
+    	defaultDeluxeToppings.add(Toppings.ONIONS);
+    	defaultDeluxeToppings.add(Toppings.OLIVES);
     	thePizza = PizzaMaker.createPizza("Deluxe");
-    	thePizza.setOrderNumber(orderNum);
+    	thePizza = (Deluxe) thePizza;
     	thePizza.setSize(Size.SMALL);
     	thePizza.setToppings(defaultDeluxeToppings);
-    	thePizza.setNoToppings(5);
     	
     	imgOrder.setImage(deluxeImage);
     	txtSelectedToppings.appendText("Sausage\nMushrooms\nArtichoke Hearts\nOnions\nOlives\n");
@@ -188,21 +194,36 @@ public class OrderController {
     	hamRemove.setDisable(true);
     	pineappleRemove.setDisable(true);
     	pepperoniRemove.setDisable(true);
-    	
-    	thePizza.calculatePrice();
-    	txtPrice.setText(String.valueOf(thePizza.getPrice()));
-    	
-    	
+  
+    	txtPrice.setText(String.valueOf(thePizza.price()));
 
     }
     
     /**
     Sets up the Hawaiian ordering page
     @author Emily Nelson
-    */		
+    */
     public void setPicHawaiian() {
     	imgOrder.setImage(hawaiianImage);
+    	ArrayList<Toppings> defaultHawaiianToppings = new ArrayList<Toppings>();
+    	defaultHawaiianToppings.add(Toppings.HAM);
+    	defaultHawaiianToppings.add(Toppings.PINEAPPLE);
+    	thePizza = PizzaMaker.createPizza("Hawaiian");
+    	thePizza.setSize(Size.SMALL);
+    	thePizza.setToppings(defaultHawaiianToppings);
     	
+    	txtSelectedToppings.appendText("Pineapple\nHam\n");
+    	sausageRemove.setDisable(true);
+    	mushroomRemove.setDisable(true);
+    	artichokeRemove.setDisable(true);
+    	onionsRemove.setDisable(true);
+    	olivesRemove.setDisable(true);
+    	hamAdd.setDisable(true);
+    	pineappleAdd.setDisable(true);
+    	pineappleRemove.setDisable(false);
+    	pepperoniRemove.setDisable(true);
+    	
+    	txtPrice.setText(String.valueOf(thePizza.price()));
     }
     
     /**
@@ -211,204 +232,192 @@ public class OrderController {
     */
     public void setPicPepperoni() {
     	imgOrder.setImage(pepperoniImage);
+    	ArrayList<Toppings> defaultPepperoniToppings = new ArrayList<Toppings>();
+    	defaultPepperoniToppings.add(Toppings.PEPPERONI);
+    	thePizza = PizzaMaker.createPizza("Pepperoni");
+    	thePizza.setSize(Size.SMALL);
+    	thePizza.setToppings(defaultPepperoniToppings);
+    	
+    	txtSelectedToppings.appendText("Pepperoni\n");
+    	
+    	pepperoniRemove.setDisable(false);
+    	pepperoniAdd.setDisable(true);
+    	sausageRemove.setDisable(true);
+    	mushroomRemove.setDisable(true);    
+    	artichokeRemove.setDisable(true);
+    	onionsRemove.setDisable(true);
+    	olivesRemove.setDisable(true);
+    	hamRemove.setDisable(true);
+    	pineappleRemove.setDisable(true);
+    	
+    	txtPrice.setText(String.valueOf(thePizza.price()));
+    	
     }
     
     /**
     Changes pizza size to Small
     @author Emily Nelson
-    */	
+    */
     public void changeToSmall(ActionEvent e) {
     	mnuSize.setText("Small");
+    	
+    	thePizza.setSize(Size.SMALL);
+    	
+    	txtPrice.setText(String.valueOf(thePizza.price()));
     }
-	
+    
     /**
     Changes pizza size to Medium
     @author Emily Nelson
-    */	
+    */
     public void changeToMedium(ActionEvent e) {
     	mnuSize.setText("Medium");
     	
     	thePizza.setSize(Size.MEDIUM);
     	
-    	thePizza.calculatePrice();
-    	txtPrice.setText(String.valueOf(thePizza.getPrice()));
+    	txtPrice.setText(String.valueOf(thePizza.price()));
     	
     }
     
     /**
     Changes pizza size to Large
     @author Emily Nelson
-    */	
+    */
     public void changeToLarge(ActionEvent e) {
     	mnuSize.setText("Large");
-    	Pizza newPizza = new Pizza(orderNum);
     	
-    	Pizza foundPizza = order.getPizza(newPizza);
+    	thePizza.setSize(Size.LARGE);
     	
-    	foundPizza.setSize(Size.LARGE);
-    	
-    	foundPizza.calculatePrice();
-    	txtPrice.setText(String.valueOf(foundPizza.getPrice()));
+    	txtPrice.setText(String.valueOf(thePizza.price()));
     }
     
     /**
     Adds Sausage to pizza
     Does nothing if sausage is on pizza already
     @author Emily Nelson
-    */	
+    */
     public void addSausage(ActionEvent e) {
-      	thePizza.setNoToppings(thePizza.getNoToppings() + 1);
-      	if (!checkToppings(thePizza.getNoToppings())) return;
-    	int index = findEmptySpotToppings(thePizza.getToppings());
-    	thePizza.getToppings()[index] = Toppings.SAUSAGE;
+      	if (!checkToppings(thePizza.toppings.size())) return;
+    	thePizza.getToppings().add(Toppings.SAUSAGE);
     	txtSelectedToppings.appendText("Sausage\n");
     	sausageAdd.setDisable(true);
     	sausageRemove.setDisable(false);
     	
-    	thePizza.calculatePrice();
-    	txtPrice.setText(String.valueOf(thePizza.getPrice()));
+    	txtPrice.setText(String.valueOf(thePizza.price()));
     }
     
     /**
     Adds Mushroom to pizza
     Does nothing if mushroom is on pizza already
     @author Emily Nelson
-    */	
+    */
     public void addMushroom(ActionEvent e) {
-      	thePizza.setNoToppings(thePizza.getNoToppings() + 1);
-      	if (!checkToppings(thePizza.getNoToppings())) return;
-    	int index = findEmptySpotToppings(thePizza.getToppings());
-    	thePizza.getToppings()[index] = Toppings.MUSHROOMS;
+      	if (!checkToppings(thePizza.toppings.size())) return;
+      	thePizza.getToppings().add(Toppings.MUSHROOMS);
     	txtSelectedToppings.appendText("Mushrooms\n");
     	mushroomAdd.setDisable(true);
     	mushroomRemove.setDisable(false);
     	
-    	thePizza.calculatePrice();
-    	txtPrice.setText(String.valueOf(thePizza.getPrice()));
+    	txtPrice.setText(String.valueOf(thePizza.price()));
     }
     
     /**
     Adds Artichoke to pizza
     Does nothing if Artichoke is on pizza already
     @author Emily Nelson
-    */	
+    */
     public void addArtichoke(ActionEvent e) {
-      	thePizza.setNoToppings(thePizza.getNoToppings() + 1);
-      	if (!checkToppings(thePizza.getNoToppings())) return;
-    	int index = findEmptySpotToppings(thePizza.getToppings());
-    	thePizza.getToppings()[index] = Toppings.ARTICHOKES;
+      	if (!checkToppings(thePizza.toppings.size())) return;
+      	thePizza.getToppings().add(Toppings.ARTICHOKES);
     	txtSelectedToppings.appendText("Artichoke Hearts\n");
     	artichokeAdd.setDisable(true);
     	artichokeRemove.setDisable(false);
     	
-    	thePizza.calculatePrice();
-    	txtPrice.setText(String.valueOf(thePizza.getPrice()));
+    	txtPrice.setText(String.valueOf(thePizza.price()));
     }
     
     /**
     Adds Onions to pizza
     Does nothing if onions is on pizza already
     @author Emily Nelson
-    */	
+    */
     public void addOnions(ActionEvent e) {
-      	thePizza.setNoToppings(thePizza.getNoToppings() + 1);
-      	if (!checkToppings(thePizza.getNoToppings())) return;
-    	int index = findEmptySpotToppings(thePizza.getToppings());
-    	thePizza.getToppings()[index] = Toppings.ONIONS;
+      	if (!checkToppings(thePizza.toppings.size())) return;
+      	thePizza.getToppings().add(Toppings.ONIONS);
     	txtSelectedToppings.appendText("Onions\n");
     	onionsAdd.setDisable(true);
     	onionsRemove.setDisable(false);
     	
-    	thePizza.calculatePrice();
-    	txtPrice.setText(String.valueOf(thePizza.getPrice()));
+    	txtPrice.setText(String.valueOf(thePizza.price()));
     }
     
     /**
     Adds Olives to pizza
     Does nothing if olives is on pizza already
     @author Emily Nelson
-    */	
+    */
     public void addOlives(ActionEvent e) {
-      	thePizza.setNoToppings(thePizza.getNoToppings() + 1);
-      	if (!checkToppings(thePizza.getNoToppings())) return;
-    	int index = findEmptySpotToppings(thePizza.getToppings());
-    	thePizza.getToppings()[index] = Toppings.OLIVES;
+      	if (!checkToppings(thePizza.toppings.size())) return;
+      	thePizza.getToppings().add(Toppings.OLIVES);
     	txtSelectedToppings.appendText("Olives\n");
     	olivesAdd.setDisable(true);
     	olivesRemove.setDisable(false);
     	
-    	thePizza.calculatePrice();
-    	txtPrice.setText(String.valueOf(thePizza.getPrice()));
+    	txtPrice.setText(String.valueOf(thePizza.price()));
     }
     
     /**
     Adds Ham to pizza
     Does nothing if ham is on pizza already
     @author Emily Nelson
-    */	
+    */
     public void addHam(ActionEvent e) {
-      	thePizza.setNoToppings(thePizza.getNoToppings() + 1);
-      	if (!checkToppings(thePizza.getNoToppings())) return;
-    	int index = findEmptySpotToppings(thePizza.getToppings());
-    	thePizza.getToppings()[index] = Toppings.HAM;
+      	if (!checkToppings(thePizza.toppings.size())) return;
+      	thePizza.getToppings().add(Toppings.HAM);
     	txtSelectedToppings.appendText("Ham\n");
     	hamAdd.setDisable(true);
     	hamRemove.setDisable(false);
     	
-    	thePizza.calculatePrice();
-    	txtPrice.setText(String.valueOf(thePizza.getPrice()));
+    	txtPrice.setText(String.valueOf(thePizza.price()));
     }
     
     /**
     Adds Pineapple to pizza
     Does nothing if pineapple is on pizza already
     @author Emily Nelson
-    */	
+    */
     public void addPineapple(ActionEvent e) {
-      	thePizza.setNoToppings(thePizza.getNoToppings() + 1);
-      	if (!checkToppings(thePizza.getNoToppings())) return;
-       	int index = findEmptySpotToppings(thePizza.getToppings());
-    	thePizza.getToppings()[index] = Toppings.PINEAPPLE;
+      	if (!checkToppings(thePizza.toppings.size())) return;
+      	thePizza.getToppings().add(Toppings.PINEAPPLE);
     	txtSelectedToppings.appendText("Pineapple\n");
     	pineappleAdd.setDisable(true);
     	pineappleRemove.setDisable(false);
     	
-    	thePizza.calculatePrice();
-    	txtPrice.setText(String.valueOf(thePizza.getPrice()));
+    	txtPrice.setText(String.valueOf(thePizza.price()));
     }
    
     /**
     Adds Pepperoni to pizza
     Does nothing if pepperoni is on pizza already
     @author Emily Nelson
-    */	
+    */
     public void addPepperoni(ActionEvent e) {
-      	thePizza.setNoToppings(thePizza.getNoToppings() + 1);
-      	if (!checkToppings(thePizza.getNoToppings())) return;
-    	int index = findEmptySpotToppings(thePizza.getToppings());
-    	thePizza.getToppings()[index] = Toppings.PEPPERONI;
+      	if (!checkToppings(thePizza.toppings.size())) return;
+      	thePizza.getToppings().add(Toppings.PEPPERONI);
     	txtSelectedToppings.appendText("Pepperoni\n");
     	pepperoniAdd.setDisable(true);
     	pepperoniRemove.setDisable(false);
     	
-    	thePizza.calculatePrice();
-    	txtPrice.setText(String.valueOf(thePizza.getPrice()));
+    	txtPrice.setText(String.valueOf(thePizza.price()));
     }
     
-
     /**
     Removes Sausage from pizza
     Does nothing if sausage is not on pizza 
     @author Emily Nelson
-    */	
+    */
     public void removeSausage(ActionEvent e) { 	
-    	thePizza.setNoToppings(thePizza.getNoToppings() - 1);
-    	int index = findTopping(thePizza.getToppings(), Toppings.SAUSAGE);
-    	thePizza.getToppings()[index] = null;
-    	
-    	if (index < 6) {
-    		moveDown(thePizza, index);
-    	}
+    	thePizza.getToppings().remove(Toppings.SAUSAGE);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
@@ -419,24 +428,16 @@ public class OrderController {
     	sausageAdd.setDisable(false);
     	sausageRemove.setDisable(true);
     	
-    	thePizza.calculatePrice();
-    	txtPrice.setText(String.valueOf(thePizza.getPrice()));
+    	txtPrice.setText(String.valueOf(thePizza.price()));
     }
     
-
     /**
     Removes Mushroom from pizza
     Does nothing if mushroom is not on pizza 
     @author Emily Nelson
     */
     public void removeMushroom(ActionEvent e) {
-    	thePizza.setNoToppings(thePizza.getNoToppings() - 1);
-    	int index = findTopping(thePizza.getToppings(), Toppings.MUSHROOMS);
-    	thePizza.getToppings()[index] = null;
-    	
-    	if (index < 6) {
-    		moveDown(thePizza, index);
-    	}
+    	thePizza.getToppings().remove(Toppings.MUSHROOMS);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
@@ -447,8 +448,7 @@ public class OrderController {
     	mushroomAdd.setDisable(false);
     	mushroomRemove.setDisable(true);
     	
-    	thePizza.calculatePrice();
-    	txtPrice.setText(String.valueOf(thePizza.getPrice()));
+    	txtPrice.setText(String.valueOf(thePizza.price()));
     }
     
     /**
@@ -457,13 +457,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removeArtichoke(ActionEvent e) {
-    	thePizza.setNoToppings(thePizza.getNoToppings() - 1);
-    	int index = findTopping(thePizza.getToppings(), Toppings.ARTICHOKES);
-    	thePizza.getToppings()[index] = null;
-    	
-    	if (index < 6) {
-    		moveDown(thePizza, index);
-    	}
+    	thePizza.getToppings().remove(Toppings.ARTICHOKES);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
@@ -474,8 +468,7 @@ public class OrderController {
     	artichokeAdd.setDisable(false);
     	artichokeRemove.setDisable(true);
     	
-    	thePizza.calculatePrice();
-    	txtPrice.setText(String.valueOf(thePizza.getPrice()));
+    	txtPrice.setText(String.valueOf(thePizza.price()));
     }
     
     /**
@@ -484,13 +477,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removeOnions(ActionEvent e) {
-    	thePizza.setNoToppings(thePizza.getNoToppings() - 1);
-    	int index = findTopping(thePizza.getToppings(), Toppings.ONIONS);
-    	thePizza.getToppings()[index] = null;
-    	
-    	if (index < 6) {
-    		moveDown(thePizza, index);
-    	}
+    	thePizza.getToppings().remove(Toppings.ONIONS);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
@@ -500,9 +487,8 @@ public class OrderController {
     	
     	onionsAdd.setDisable(false);
     	onionsRemove.setDisable(true);
-    	
-    	thePizza.calculatePrice();
-    	txtPrice.setText(String.valueOf(thePizza.getPrice()));
+
+    	txtPrice.setText(String.valueOf(thePizza.price()));
     }
     
     /**
@@ -511,25 +497,18 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removeOlives(ActionEvent e) {
-    	thePizza.setNoToppings(thePizza.getNoToppings() - 1);
-    	int index = findTopping(thePizza.getToppings(), Toppings.OLIVES);
-    	thePizza.getToppings()[index] = null;
-    	
-    	if (index < 6) {
-    		moveDown(thePizza, index);
-    	}
+    	thePizza.getToppings().remove(Toppings.OLIVES);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
     	int i = top.indexOf("Olives");
-    	top = top.substring(0, i) + top.substring(i+8, endIndex);
+    	top = top.substring(0, i) + top.substring(i+7, endIndex);
     	txtSelectedToppings.setText(top);
     	
     	olivesAdd.setDisable(false);
     	olivesRemove.setDisable(true);
     	
-    	thePizza.calculatePrice();
-    	txtPrice.setText(String.valueOf(thePizza.getPrice()));
+    	txtPrice.setText(String.valueOf(thePizza.price()));
     }
     
     /**
@@ -538,13 +517,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removeHam(ActionEvent e) {
-    	thePizza.setNoToppings(thePizza.getNoToppings() - 1);
-    	int index = findTopping(thePizza.getToppings(), Toppings.HAM);
-    	thePizza.getToppings()[index] = null;
-    	
-    	if (index < 6) {
-    		moveDown(thePizza, index);
-    	}
+    	thePizza.getToppings().remove(Toppings.MUSHROOMS);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
@@ -555,8 +528,7 @@ public class OrderController {
     	hamAdd.setDisable(false);
     	hamRemove.setDisable(true);
     	
-    	thePizza.calculatePrice();
-    	txtPrice.setText(String.valueOf(thePizza.getPrice()));
+    	txtPrice.setText(String.valueOf(thePizza.price()));
     }
     
     /**
@@ -565,13 +537,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removePineapple(ActionEvent e) {
-    	thePizza.setNoToppings(thePizza.getNoToppings() - 1);
-    	int index = findTopping(thePizza.getToppings(), Toppings.PINEAPPLE);
-    	thePizza.getToppings()[index] = null;
-    	
-    	if (index < 6) {
-    		moveDown(thePizza, index);
-    	}
+    	thePizza.getToppings().remove(Toppings.MUSHROOMS);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
@@ -581,9 +547,8 @@ public class OrderController {
     	
     	pineappleAdd.setDisable(false);
     	pineappleRemove.setDisable(true);
-    	
-    	thePizza.calculatePrice();
-    	txtPrice.setText(String.valueOf(thePizza.getPrice()));
+
+    	txtPrice.setText(String.valueOf(thePizza.price()));
     }
     
     /**
@@ -592,15 +557,8 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removePepperoni(ActionEvent e) {
-    	thePizza.setNoToppings(thePizza.getNoToppings() - 1);
-    	int index = findTopping(thePizza.getToppings(), Toppings.PEPPERONI);
-    	thePizza.getToppings()[index] = null;
-    	
-    	if (index < 6) {
-    		moveDown(thePizza, index);
-    	}
+    	thePizza.getToppings().remove(Toppings.MUSHROOMS);
 
-    	//
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
     	int i = top.indexOf("Pepperoni");
@@ -609,29 +567,10 @@ public class OrderController {
     	
     	pepperoniAdd.setDisable(false);
     	pepperoniRemove.setDisable(true);
-    	
-    	thePizza.calculatePrice();
-    	txtPrice.setText(String.valueOf(thePizza.getPrice()));
+
+    	txtPrice.setText(String.valueOf(thePizza.price()));
     	
     }
-    
-    /*
-    public void addToOrder() {
-		try {
-			Stage newStage = new Stage();
-	    	VBox popup = new VBox();
-			Label notif  = new Label("\n\n\t\t Successfully Added to Order.");
-	    	popup.getChildren().add(notif);
-	    	Scene stageScene = new Scene(popup, 250, 100);
-	    	newStage.setScene(stageScene);
-	    	newStage.setTitle("Order Confirmation");
-	    	newStage.show();
-	    	return;
-		} catch(Exception e) {
-			e.printStackTrace();
-		}
-    }
-    */
     
     /**
     Checks if pizza has more than 7 toppings
@@ -676,21 +615,7 @@ public class OrderController {
     	return -1;
     }
     
-    /**
-    Moves the toppings down in the Toppings array of a certain pizza
-    @param foundPizza the pizza whose Toppings array we should move down
-    @param index the index to start moving the toppings in Toppings array down
-    @author Emily Nelson
-    */
-    public void moveDown(Pizza foundPizza, int index) {
-		while (index < 6) {
-			foundPizza.getToppings()[index] = foundPizza.getToppings()[index+1];
-			index++;
-		}
-		
-		foundPizza.getToppings()[index] = null;
-    }
-    	
+    
 	/**
 	Finds the first empty index/spot in the Toppings array
 	@param toppings the Toppings array where the empty spot is being looked for
@@ -721,7 +646,6 @@ public class OrderController {
 		order.printOrder();
 
 		allOrders = new Order[10];
-		//storeOrders.setAllOrders(allOrders);
 		storeOrders.addToOrders(order);
 		
 		try {
@@ -732,7 +656,6 @@ public class OrderController {
 		} catch (Exception exception) {
 			
 		}
-		storeOrders.printAllOrders();
 		stage.close();
 	}
 	
