@@ -84,4 +84,12 @@ public class StoreOrders {
 	public void setAllOrders(Order[] allOrders) {
 		this.allOrders = allOrders;
 	}
+	
+	public int getSize() {
+		return size;
+	}
+	
+	public void setSize(int size) {
+		this.size = size;
+	}
 }
