@@ -53,7 +53,7 @@ public class Order {
 	Checks if a pizza can be removed from the Pizza array
 	Removes pizza from Pizza array if pizza is found
 	Does nothing if the pizza is not in Pizza array
-	@param pizaa the pizza that is to be removed
+	@param pizza the pizza that is to be removed
 	@return true if pizza is in Pizza array, false otherwise
 	@author Emily Nelson
 	*/
@@ -72,8 +72,6 @@ public class Order {
 			
 			pizzas[index] = null;
 		}
-		
-		printOrder();
 		
 		return true;
 	}
@@ -97,17 +95,6 @@ public class Order {
 		return size;
 	}
 	
-	public void printOrder() {
-		if (size == 0) {
-			return;
-		}
-		System.out.println(size + " pizzas for " + orderNumber + " :");
-		
-		for (int i = 0; i < size; i++) {
-			System.out.println(pizzas[i].toString());
-		}
-	}
-	
 	
 	/**
 	Returns the array of pizzas for a given order
@@ -115,8 +102,6 @@ public class Order {
 	@author Emily Nelson 
 	*/
 	public Pizza[] getAllPizzasForOneOrder() {
-		
-		Pizza[] pizzas = new Pizza[size];
 		
 		return pizzas;
 	}
