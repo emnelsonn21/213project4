@@ -63,7 +63,7 @@ public class Pepperoni extends Pizza {
 	@Override
 	public String toString() {
 		String str = super.toString();
-		return "PEPPERONI : " + str;
+		return "PEPPERONI : " + str + " for " + price();
 	}
 	
 }
