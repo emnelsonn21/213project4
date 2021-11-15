@@ -3,6 +3,7 @@ package application;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javafx.stage.FileChooser;
 
 /**
 This class keeps the list of orders placed by the user
@@ -30,7 +31,7 @@ public class StoreOrders {
 	
 	/**
 	Finds the index where the order is located in the Order array using customer ID
-	@param cust!D the customer ID being used to locate order
+	@param custID the customer ID being used to locate order
 	@return the index of order if found, -1 otherwise
 	@author Emily Nelson
 	*/
@@ -58,23 +59,29 @@ public class StoreOrders {
 		
 		allOrders[index] = order;
 		size++;
-		System.out.println("total orders: " + size);
 	}
 	
 	/**
 	Exports the store orders in a text file
 	@author Cristofer Gomez-Martinez
 	*/
-	public void export() {
-		try {
-			File textFile = new File("StoreOrders.txt");
-			
-			textFile.createNewFile();
-			
-			PrintWriter storeOrders = new PrintWriter("StoreOrders.txt");
+	public File export() {
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Choose location to save");
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("TXT files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extFilter);
+		File file = fileChooser.showSaveDialog(null);
+		if (file != null) {
+			PrintWriter storeOrders = null;
+			try {
+				storeOrders = new PrintWriter(file);
+				
+			}catch (IOException e) {
+				e.printStackTrace();
+			}
 			
 			for (int index = 0; index < size; index++) {
-				storeOrders.println(allOrders[index].getOrderNumber());
+				storeOrders.println(allOrders[index].getOrderNumber() + ":");
 					
 					for(int pizzaIndex = 0; pizzaIndex < allOrders[index].getSize(); pizzaIndex++) {
 						storeOrders.println("\t" + allOrders[index].getAllPizzasForOneOrder()[pizzaIndex].toString());
@@ -82,10 +89,10 @@ public class StoreOrders {
 			}
 			
 			storeOrders.close();
-		}catch (IOException e) {
-			//e.printStackTrace();
+		
 		}
-			
+
+			return file;
 	}
 	
 	/**
@@ -102,15 +109,10 @@ public class StoreOrders {
 		return -1;
 	}
 	
-	public void printAllOrders() {
-		for (int i = 0; i < size; i++) {
-			System.out.println(allOrders[i].getPizzas());
-		}
-	}
 	
 	/**
 	Returns the array of orders
-        @return Order array
+    @return Order array
 	@author Emily Nelson 
 	*/
 	public Order[] getAllOrders() {
@@ -137,7 +139,7 @@ public class StoreOrders {
 	
 	/**
 	Set the size of Order array
-        @size the size to set
+    @param size the size to set
 	@author Emily Nelson 
 	*/
 	public void setSize(int size) {
