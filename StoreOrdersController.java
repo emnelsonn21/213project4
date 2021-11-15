@@ -12,6 +12,10 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
+/**
+This class contains the methods that organize the user Store Order inputs
+@author Emily Nelson, Cristofer Gomez-Martinez
+*/
 public class StoreOrdersController {
 
     @FXML
@@ -33,24 +37,43 @@ public class StoreOrdersController {
     
     //need to get the order[] from OrderController and put it here
     //use getPizzas method as a toString
-    Order[] allOrders;
+    private Order[] allOrders;
     
     //also need to get storeOrders from main-->ordercont and assign allOrders to it
-    StoreOrders storeOrders;
+    private StoreOrders storeOrders;
     
+    /**
+    Sets the Order array with all orders
+    @param allOrders the orders to set
+    @author Emily Nelson
+    */
     public void getAllOrders(Order[] allOrders) {
     	this.allOrders = allOrders;
     }
     
+    /**
+    Sets the store orders
+    @param storeOrders the store orders to set 
+    @author Emily Nelson
+    */
     public void getStoreOrders(StoreOrders storeOrders) {
     	this.storeOrders = storeOrders;
     }
     
+    /**
+    Sets the order number
+    @param orderNum the order number to set
+    @author Emily Nelson
+    */
     public void takeOrderNum(String orderNum) {
-    	
     	this.orderNum = orderNum;
     }
     
+    /**
+    Fills in the Store Order List with pizzas from specific Order
+    @param event
+    @author Emily Nelson
+    */
     public void fillOrderList(ActionEvent e) {
     	String orderNum = mnuPhoneNumbers.getValue();
     	int i = findWithOrderNum(orderNum);
@@ -71,6 +94,11 @@ public class StoreOrdersController {
 
     }
     
+    /**
+    Finds the index of the Order in the Orders array
+    @param orderNum the order number used to find index
+    @return the index of Order if found, -1 otherwise
+    */
     private int findWithOrderNum(String orderNum) {
 		for (int index = 0; index < allOrders.length; index++) {
 			if (orderNum.equals(allOrders[index].getOrderNumber())) {
@@ -80,6 +108,7 @@ public class StoreOrdersController {
 		return -1;
     }
     
+    
     public void addMenuItems(StoreOrders storeOrders) {
     	for (int i = 0; i < storeOrders.getSize(); i++) {
     		String num = storeOrders.getAllOrders()[i].getOrderNumber();
@@ -87,6 +116,11 @@ public class StoreOrdersController {
     	}
     }
     
+    /**
+    Cancels an Order of Pizzas
+    @param event
+    @author Emily Nelson
+    */
     public void cancelOrder(ActionEvent event) {
     	String orderNum = mnuPhoneNumbers.getValue();
     	int index = findWithOrderNum(orderNum);
