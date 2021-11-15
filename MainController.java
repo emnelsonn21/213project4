@@ -86,7 +86,7 @@ public class MainController {
     
     /**
     Confirms if order has been started
-    @param event
+    @param event the event
     @author Emily Nelson
     */
     public void showConfirmation(KeyEvent event) throws Exception {
@@ -121,6 +121,7 @@ public class MainController {
 		    		} else {	
 		    			makeNewOrder();
 		    			order.setOrderNumber(custID);
+		    			customerID.clear();
 				    	Label confirm  = new Label("\n\n\t\t Starting order. \n\t\t Order ID is " + custID);
 				    	popup.getChildren().add(confirm);
 				    	Scene stageScene = new Scene(popup, 250, 100);
@@ -137,7 +138,7 @@ public class MainController {
 
     /**
     Opens up the Deluxe ordering page
-    @param event
+    @param event the event
     @author Emily Nelson
     */
     public void openDeluxeOrderPage(ActionEvent event) throws Exception { 
@@ -281,23 +282,37 @@ public class MainController {
     @author Emily Nelson
     */
     public void openViewOrderPage(ActionEvent event) {
-        try {
-        	FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("ReviewOrderView.fxml"));
-        	Parent root1 = (Parent) fxmlLoader1.load();
-            ReviewOrderController reviewOrder = (ReviewOrderController) fxmlLoader1.getController();
-        	Stage stage = new Stage();
-            stage.setScene(new Scene(root1));  
-            stage.setTitle("Review Order");
-            stage.show();
-            
-            reviewOrder.takeOrderNum(custID);
-            reviewOrder.getAllOrders(storeOrders.getAllOrders());
-            reviewOrder.fillOrderReviewList2(storeOrders.getAllOrders());
-            reviewOrder.settingStoreOrders(storeOrders);
-
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+    	if (storeOrders.getAllOrders()[0] == null) {
+	        try {
+	        	FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("ReviewOrderView.fxml"));
+	        	Parent root1 = (Parent) fxmlLoader1.load();
+	        	Stage stage = new Stage();
+	            stage.setScene(new Scene(root1));  
+	            stage.setTitle("Review Order");
+	            stage.show();
+	
+	        } catch(Exception e) {
+	            e.printStackTrace();
+	        }
+    	} else {
+	        try {
+	        	FXMLLoader fxmlLoader1 = new FXMLLoader(getClass().getResource("ReviewOrderView.fxml"));
+	        	Parent root1 = (Parent) fxmlLoader1.load();
+	            ReviewOrderController reviewOrder = (ReviewOrderController) fxmlLoader1.getController();
+	        	Stage stage = new Stage();
+	            stage.setScene(new Scene(root1));  
+	            stage.setTitle("Review Order");
+	            stage.show();
+	            
+	            reviewOrder.takeOrderNum(custID);
+	            reviewOrder.getAllOrders(storeOrders.getAllOrders());
+	            reviewOrder.fillOrderReviewList2(storeOrders.getAllOrders());
+	            reviewOrder.settingStoreOrders(storeOrders);
+	
+	        } catch(Exception e) {
+	            e.printStackTrace();
+	        }
+    	}
 	}
     
     /**
