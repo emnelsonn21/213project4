@@ -46,7 +46,7 @@ public class StoreOrdersController {
     @param event
     @author Emily Nelson
     */
-    protected void fillOrderList(ActionEvent e) {
+    public void fillOrderList(ActionEvent e) {
     	String orderNum = mnuPhoneNumbers.getValue();
     	int i = findWithOrderNum(orderNum);
     	Pizza[] pizzas = new Pizza[allOrders[i].getSize()];
@@ -85,7 +85,7 @@ public class StoreOrdersController {
      * @param storeOrders
      * @author Emily Nelson
      */
-    protected void addMenuItems(StoreOrders storeOrders) {
+    public void addMenuItems(StoreOrders storeOrders) {
     	for (int i = 0; i < storeOrders.getSize(); i++) {
     		String num = storeOrders.getAllOrders()[i].getOrderNumber();
     		mnuPhoneNumbers.getItems().add(num);
@@ -97,7 +97,7 @@ public class StoreOrdersController {
     @param event
     @author Emily Nelson
     */
-    protected void cancelOrder(ActionEvent event) {
+    public void cancelOrder(ActionEvent event) {
     	String orderNum = mnuPhoneNumbers.getValue();
     	int index = findWithOrderNum(orderNum);
     	allOrders[index] = null;
