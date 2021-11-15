@@ -17,6 +17,8 @@ This class contains the methods that organize the user Store Order inputs
 @author Emily Nelson, Cristofer Gomez-Martinez
 */
 public class StoreOrdersController {
+	
+	static final double tax = 0.06625;
 
     @FXML
     private Button btnCancelOrder;
@@ -35,46 +37,16 @@ public class StoreOrdersController {
     
     private String orderNum = "";
     
-    //need to get the order[] from OrderController and put it here
-    //use getPizzas method as a toString
     private Order[] allOrders;
-    
-    //also need to get storeOrders from main-->ordercont and assign allOrders to it
+  
     private StoreOrders storeOrders;
-    
-    /**
-    Sets the Order array with all orders
-    @param allOrders the orders to set
-    @author Emily Nelson
-    */
-    public void getAllOrders(Order[] allOrders) {
-    	this.allOrders = allOrders;
-    }
-    
-    /**
-    Sets the store orders
-    @param storeOrders the store orders to set 
-    @author Emily Nelson
-    */
-    public void getStoreOrders(StoreOrders storeOrders) {
-    	this.storeOrders = storeOrders;
-    }
-    
-    /**
-    Sets the order number
-    @param orderNum the order number to set
-    @author Emily Nelson
-    */
-    public void takeOrderNum(String orderNum) {
-    	this.orderNum = orderNum;
-    }
     
     /**
     Fills in the Store Order List with pizzas from specific Order
     @param event
     @author Emily Nelson
     */
-    public void fillOrderList(ActionEvent e) {
+    private void fillOrderList(ActionEvent e) {
     	String orderNum = mnuPhoneNumbers.getValue();
     	int i = findWithOrderNum(orderNum);
     	Pizza[] pizzas = new Pizza[allOrders[i].getSize()];
@@ -88,7 +60,7 @@ public class StoreOrdersController {
     	
     	DecimalFormat df = new DecimalFormat("0.00");
     	
-    	totalPrice = totalPrice + (totalPrice * .06625);
+    	totalPrice = totalPrice + (totalPrice * tax);
     	
     	txtOrdersTotal.setText(df.format(totalPrice));
 
@@ -108,8 +80,12 @@ public class StoreOrdersController {
 		return -1;
     }
     
-    
-    public void addMenuItems(StoreOrders storeOrders) {
+    /**
+     * Fills the ChoiceBox with all phone numbers to choose from
+     * @param storeOrders
+     * @author Emily Nelson
+     */
+    protected void addMenuItems(StoreOrders storeOrders) {
     	for (int i = 0; i < storeOrders.getSize(); i++) {
     		String num = storeOrders.getAllOrders()[i].getOrderNumber();
     		mnuPhoneNumbers.getItems().add(num);
@@ -121,12 +97,30 @@ public class StoreOrdersController {
     @param event
     @author Emily Nelson
     */
-    public void cancelOrder(ActionEvent event) {
+    protected void cancelOrder(ActionEvent event) {
     	String orderNum = mnuPhoneNumbers.getValue();
     	int index = findWithOrderNum(orderNum);
     	allOrders[index] = null;
     	storeOrders.setSize(storeOrders.getSize() - 1);
     	Stage stage = (Stage) btnCancelOrder.getScene().getWindow();
     	stage.close();
+    }
+    
+    /**
+    Sets the Order array with all orders
+    @param allOrders the orders to set
+    @author Emily Nelson
+    */
+    public void getAllOrders(Order[] allOrders) {
+    	this.allOrders = allOrders;
+    }
+    
+    /**
+    Sets the store orders
+    @param storeOrders the store orders to set 
+    @author Emily Nelson
+    */
+    public void getStoreOrders(StoreOrders storeOrders) {
+    	this.storeOrders = storeOrders;
     }
 }
