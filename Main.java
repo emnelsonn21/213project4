@@ -22,7 +22,7 @@ public class Main extends Application {
     
     /**
      * This method opens the stage
-     * @param the primary stage
+     * @param primaryStage the primary stage
      * @author Emily Nelson
      */
 	@Override
