@@ -4,6 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
+/**
+This class keeps the list of orders placed by the user
+@author Emily Nelson, Cristofer Gomez-Martinez
+*/
 public class StoreOrders {
 
 	private Order[] allOrders;
