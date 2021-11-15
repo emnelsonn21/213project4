@@ -1,15 +1,17 @@
 package application;
 
+import java.io.File;
 import java.text.DecimalFormat;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -42,11 +44,12 @@ public class StoreOrdersController {
     private StoreOrders storeOrders;
     
     /**
-    Fills in the Store Order List with pizzas from specific Order
-    @param event
-    @author Emily Nelson
+    *Fills in the Store Order List with pizzas from specific Order
+    *@param e the event
+    *@author Emily Nelson
     */
     public void fillOrderList(ActionEvent e) {
+    	listOrders.getItems().clear();
     	String orderNum = mnuPhoneNumbers.getValue();
     	int i = findWithOrderNum(orderNum);
     	Pizza[] pizzas = new Pizza[allOrders[i].getSize()];
@@ -82,7 +85,7 @@ public class StoreOrdersController {
     
     /**
      * Fills the ChoiceBox with all phone numbers to choose from
-     * @param storeOrders
+     * @param storeOrders the instance of store orders
      * @author Emily Nelson
      */
     public void addMenuItems(StoreOrders storeOrders) {
@@ -94,7 +97,7 @@ public class StoreOrdersController {
     
     /**
     Cancels an Order of Pizzas
-    @param event
+    @param event the event
     @author Emily Nelson
     */
     public void cancelOrder(ActionEvent event) {
@@ -104,6 +107,23 @@ public class StoreOrdersController {
     	storeOrders.setSize(storeOrders.getSize() - 1);
     	Stage stage = (Stage) btnCancelOrder.getScene().getWindow();
     	stage.close();
+    }
+    
+    public void downloadOrder(ActionEvent event) {
+    	
+    	File file = storeOrders.export();
+    	
+		try {
+			Stage newStage = new Stage();
+		    VBox popup = new VBox();
+	    	Label confirm  = new Label("File saved to " + file);
+	    	popup.getChildren().add(confirm);
+	    	Scene stageScene = new Scene(popup, 700, 100);
+	    	newStage.setScene(stageScene);
+	    	newStage.show();
+		} catch(Exception e) {
+    		e.printStackTrace();
+    	}
     }
     
     /**
