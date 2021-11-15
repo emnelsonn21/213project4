@@ -39,6 +39,9 @@ public class ReviewOrderController {
     
     @FXML
     private TextField txtTotalPrice;
+    
+    @FXML
+    private TextField txtSalesTax;
 	
     private String orderNum = "";
     
@@ -57,7 +60,9 @@ public class ReviewOrderController {
     	pizzas = allOrders[i].getArrOfPizzas();
     	orderReviewList.getItems().addAll(pizzas);
     	double price = calculateTotalPrice();
-    	txtTotalPrice.setText(String.valueOf(price));
+    	DecimalFormat df = new DecimalFormat("0.00");
+    	txtTotalPrice.setText(df.format(price + (price * tax)));
+    	txtSalesTax.setText(df.format(price * tax));
     }
     
     /**
@@ -102,7 +107,8 @@ public class ReviewOrderController {
     		price += order.getArrOfPizzas()[i].price();
     	}
     	
-    	price = price + (price * tax);
+    //	price = price + (price * tax);
+    	
     	DecimalFormat df = new DecimalFormat("0.00");
     	
     	return Double.valueOf(df.format(price));
@@ -149,7 +155,7 @@ public class ReviewOrderController {
 	public void settingStoreOrders(StoreOrders storeOrders) {
 		this.storeOrders = storeOrders;
 	}
-
+	
     /**
     Sets the Order array with all orders
     @param allOrders the orders to set
@@ -165,6 +171,7 @@ public class ReviewOrderController {
     @author Emily Nelson
     */
     public void takeOrderNum(String orderNum) {
+    	
     	this.orderNum = orderNum;
     }
 }
