@@ -68,7 +68,7 @@ public class MainController {
     }
     
     //only need to make an order when it's a new customer - different custID
-    Order order = new Order();
+    private Order order = new Order();
     
     /**
     Creates a new Order of pizzas
