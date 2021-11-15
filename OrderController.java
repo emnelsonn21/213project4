@@ -164,7 +164,7 @@ public class OrderController {
 
     private Order order;
     
-    private StoreOrders storeOrders;
+	private StoreOrders storeOrders;
        
    
     private Pizza thePizza;
@@ -222,7 +222,6 @@ public class OrderController {
     	olivesRemove.setDisable(true);
     	hamAdd.setDisable(true);
     	pineappleAdd.setDisable(true);
-    	//pineappleRemove.setDisable(false);
     	pepperoniRemove.setDisable(true);
     	
     	txtPrice.setText(String.valueOf(thePizza.price()));
@@ -243,7 +242,6 @@ public class OrderController {
     	
     	txtSelectedToppings.appendText("Pepperoni\n");
     	
-    	//pepperoniRemove.setDisable(false);
     	pepperoniAdd.setDisable(true);
     	sausageRemove.setDisable(true);
     	mushroomRemove.setDisable(true);    
@@ -594,7 +592,7 @@ public class OrderController {
 		    	newStage.show();
 		    	return false;
     		} catch(Exception e) {
-    			//e.printStackTrace();
+    			e.printStackTrace();
     		}
     	}
     	
@@ -635,20 +633,17 @@ public class OrderController {
 	}
 	
 
-	private Order[] allOrders;
+
 	
 	/**
 	Adds pizza to order
 	Adds pizza to store orders
-	@param event
+	@param e the event
 	@author Emily Nelson
 	*/
 	public void addToOrder(ActionEvent e) {
 		stage = (Stage) scenePane.getScene().getWindow();
 		order.add(thePizza);
-		order.printOrder();
-
-		allOrders = new Order[10];
 		storeOrders.addToOrders(order);
 		
 		try {
@@ -679,4 +674,5 @@ public class OrderController {
 	public void setOrder(Order order) {
 		this.order = order;
 	}
+	
 }
