@@ -46,7 +46,7 @@ public class StoreOrdersController {
     @param event
     @author Emily Nelson
     */
-    private void fillOrderList(ActionEvent e) {
+    protected void fillOrderList(ActionEvent e) {
     	String orderNum = mnuPhoneNumbers.getValue();
     	int i = findWithOrderNum(orderNum);
     	Pizza[] pizzas = new Pizza[allOrders[i].getSize()];
