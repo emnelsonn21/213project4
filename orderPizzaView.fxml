@@ -102,7 +102,7 @@
                         <Menu fx:id="mnuOlives" mnemonicParsing="false" text="Olives">
                           <items>
                             <MenuItem fx:id="olivesAdd" mnemonicParsing="false" onAction="#addOlives" text="Add" />
-                            <MenuItem fx:id="s" mnemonicParsing="false" onAction="#removeOlives" text="Remove" />
+                            <MenuItem fx:id="olivesRemove" mnemonicParsing="false" onAction="#removeOlives" text="Remove" />
                           </items>
                         </Menu>
                     </items>
