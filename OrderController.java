@@ -209,6 +209,7 @@ public class OrderController {
     	defaultHawaiianToppings.add(Toppings.HAM);
     	defaultHawaiianToppings.add(Toppings.PINEAPPLE);
     	thePizza = PizzaMaker.createPizza("Hawaiian");
+    	thePizza = (Hawaiian) thePizza;
     	thePizza.setSize(Size.SMALL);
     	thePizza.setToppings(defaultHawaiianToppings);
     	
@@ -220,7 +221,7 @@ public class OrderController {
     	olivesRemove.setDisable(true);
     	hamAdd.setDisable(true);
     	pineappleAdd.setDisable(true);
-    	pineappleRemove.setDisable(false);
+    	//pineappleRemove.setDisable(false);
     	pepperoniRemove.setDisable(true);
     	
     	txtPrice.setText(String.valueOf(thePizza.price()));
@@ -235,12 +236,13 @@ public class OrderController {
     	ArrayList<Toppings> defaultPepperoniToppings = new ArrayList<Toppings>();
     	defaultPepperoniToppings.add(Toppings.PEPPERONI);
     	thePizza = PizzaMaker.createPizza("Pepperoni");
+    	thePizza = (Pepperoni) thePizza;
     	thePizza.setSize(Size.SMALL);
     	thePizza.setToppings(defaultPepperoniToppings);
     	
     	txtSelectedToppings.appendText("Pepperoni\n");
     	
-    	pepperoniRemove.setDisable(false);
+    	//pepperoniRemove.setDisable(false);
     	pepperoniAdd.setDisable(true);
     	sausageRemove.setDisable(true);
     	mushroomRemove.setDisable(true);    
@@ -442,7 +444,7 @@ public class OrderController {
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
     	int i = top.indexOf("Mushrooms");
-    	top = top.substring(0, i) + top.substring(i+8, endIndex);
+    	top = top.substring(0, i) + top.substring(i+10, endIndex);
     	txtSelectedToppings.setText(top);
     	
     	mushroomAdd.setDisable(false);
@@ -517,12 +519,12 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removeHam(ActionEvent e) {
-    	thePizza.toppings.remove(Toppings.MUSHROOMS);
+    	thePizza.toppings.remove(Toppings.HAM);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
     	int i = top.indexOf("Ham");
-    	top = top.substring(0, i) + top.substring(i+8, endIndex);
+    	top = top.substring(0, i) + top.substring(i+4, endIndex);
     	txtSelectedToppings.setText(top);
     	
     	hamAdd.setDisable(false);
@@ -537,12 +539,12 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removePineapple(ActionEvent e) {
-    	thePizza.toppings.remove(Toppings.MUSHROOMS);
+    	thePizza.toppings.remove(Toppings.PINEAPPLE);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
     	int i = top.indexOf("Pineapple");
-    	top = top.substring(0, i) + top.substring(i+8, endIndex);
+    	top = top.substring(0, i) + top.substring(i+10, endIndex);
     	txtSelectedToppings.setText(top);
     	
     	pineappleAdd.setDisable(false);
@@ -557,12 +559,12 @@ public class OrderController {
     @author Emily Nelson
     */
     public void removePepperoni(ActionEvent e) {
-    	thePizza.toppings.remove(Toppings.MUSHROOMS);
+    	thePizza.toppings.remove(Toppings.PEPPERONI);
 
     	String top = txtSelectedToppings.getText();
     	int endIndex = top.length();
     	int i = top.indexOf("Pepperoni");
-    	top = top.substring(0, i) + top.substring(i+9, endIndex);
+    	top = top.substring(0, i) + top.substring(i+10, endIndex);
     	txtSelectedToppings.setText(top);
     	
     	pepperoniAdd.setDisable(false);
