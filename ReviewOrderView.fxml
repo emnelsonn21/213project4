@@ -6,21 +6,24 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="517.0" prefWidth="405.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ReviewOrderController">
+<AnchorPane prefHeight="517.0" prefWidth="606.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ReviewOrderController">
    <children>
-      <Label layoutX="101.0" layoutY="3.0" text="Review Order">
+      <Label layoutX="198.0" layoutY="3.0" text="Review Order">
          <font>
             <Font name="Goudy Stout" size="14.0" />
          </font>
       </Label>
-      <ListView fx:id="orderReviewList" layoutX="2.0" layoutY="100.0" prefHeight="241.0" prefWidth="405.0" />
-      <HBox layoutY="378.0" prefHeight="101.0" prefWidth="407.0">
+      <ListView fx:id="orderReviewList" layoutX="2.0" layoutY="100.0" prefHeight="241.0" prefWidth="599.0" />
+      <HBox layoutY="378.0" prefHeight="101.0" prefWidth="599.0">
          <children>
-            <VBox prefHeight="101.0" prefWidth="198.0">
+            <VBox prefHeight="101.0" prefWidth="196.0">
                <children>
                   <Button fx:id="btnRemoveItem" mnemonicParsing="false" onAction="#removeItem" text="Remove Selected Item">
                      <VBox.margin>
@@ -33,22 +36,34 @@
                      </VBox.margin>
                   </Button>
                </children>
-            </VBox>
-            <VBox prefHeight="101.0" prefWidth="167.0">
-               <children>
-                  <TextField fx:id="txtTotalPrice" editable="false" />
-                  <Button fx:id="btnPlaceOrder" mnemonicParsing="false" onAction="#placeOrder" text="Place Order">
-                     <VBox.margin>
-                        <Insets left="80.0" top="40.0" />
-                     </VBox.margin>
-                  </Button>
-               </children>
                <HBox.margin>
-                  <Insets left="40.0" />
+                  <Insets right="80.0" />
                </HBox.margin>
             </VBox>
+            <GridPane prefHeight="125.0" prefWidth="281.0">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="111.0" minWidth="10.0" prefWidth="80.60003662109375" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="153.39996337890625" minWidth="10.0" prefWidth="153.39996337890625" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label prefHeight="17.0" prefWidth="98.0" text="Total:  $" GridPane.rowIndex="1" />
+                  <TextField fx:id="txtTotalPrice" editable="false" prefHeight="25.0" prefWidth="108.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Sales Tax:  $" />
+                  <TextField fx:id="txtSalesTax" editable="false" GridPane.columnIndex="1" />
+                  <Button fx:id="btnPlaceOrder" mnemonicParsing="false" onAction="#placeOrder" text="Place Order" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="65.0" />
+                     </GridPane.margin>
+                  </Button>
+               </children>
+            </GridPane>
          </children>
       </HBox>
-      <Button fx:id="btnCancel" layoutX="160.0" layoutY="479.0" mnemonicParsing="false" onAction="#cancelOrder" text="Cancel Order" />
+      <Button fx:id="btnCancel" layoutX="257.0" layoutY="479.0" mnemonicParsing="false" onAction="#cancelOrder" text="Cancel Order" />
    </children>
 </AnchorPane>
