@@ -26,7 +26,7 @@ import javafx.stage.Stage;
 This class contains the methods that organize the Main Menu user inputs
 @author Emily Nelson, Cristofer Gomez-Martinez
 */
-public class MainController {
+public class MainController{
 
     @FXML
     private Button btnDownlaod;
