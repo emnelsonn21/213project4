@@ -63,7 +63,7 @@ public class Deluxe extends Pizza {
 	@Override
 	public String toString() {
 		String str = super.toString();
-		return "DELUXE : " + str;
+		return "DELUXE : " + str + " for " + price();
 	}
 
 }
