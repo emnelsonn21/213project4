@@ -136,7 +136,8 @@ public class OrderController {
     @FXML
     private Button btnAddToOrder;
     
-    Stage stage;
+    @FXML
+    private Stage stage;
     
     @FXML
     private AnchorPane scenePane;
@@ -163,10 +164,10 @@ public class OrderController {
 
     private Order order;
     
-	private StoreOrders storeOrders;
+    private StoreOrders storeOrders;
        
    
-    Pizza thePizza;
+    private Pizza thePizza;
     
     /**
     Sets up the Deluxe ordering page
