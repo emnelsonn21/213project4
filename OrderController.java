@@ -300,7 +300,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void addSausage(ActionEvent e) {
-      	if (!checkToppings(thePizza.toppings.size())) return;
+      	if (!checkToppings(thePizza.toppings.size() + 1)) return;
     	thePizza.toppings.add(Toppings.SAUSAGE);
     	txtSelectedToppings.appendText("Sausage\n");
     	sausageAdd.setDisable(true);
@@ -315,7 +315,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void addMushroom(ActionEvent e) {
-      	if (!checkToppings(thePizza.toppings.size())) return;
+      	if (!checkToppings(thePizza.toppings.size() + 1)) return;
       	thePizza.toppings.add(Toppings.MUSHROOMS);
     	txtSelectedToppings.appendText("Mushrooms\n");
     	mushroomAdd.setDisable(true);
@@ -330,7 +330,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void addArtichoke(ActionEvent e) {
-      	if (!checkToppings(thePizza.toppings.size())) return;
+      	if (!checkToppings(thePizza.toppings.size() + 1)) return;
       	thePizza.toppings.add(Toppings.ARTICHOKES);
     	txtSelectedToppings.appendText("Artichoke Hearts\n");
     	artichokeAdd.setDisable(true);
@@ -345,7 +345,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void addOnions(ActionEvent e) {
-      	if (!checkToppings(thePizza.toppings.size())) return;
+      	if (!checkToppings(thePizza.toppings.size() + 1)) return;
       	thePizza.toppings.add(Toppings.ONIONS);
     	txtSelectedToppings.appendText("Onions\n");
     	onionsAdd.setDisable(true);
@@ -360,7 +360,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void addOlives(ActionEvent e) {
-      	if (!checkToppings(thePizza.toppings.size())) return;
+      	if (!checkToppings(thePizza.toppings.size() + 1)) return;
       	thePizza.toppings.add(Toppings.OLIVES);
     	txtSelectedToppings.appendText("Olives\n");
     	olivesAdd.setDisable(true);
@@ -375,7 +375,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void addHam(ActionEvent e) {
-      	if (!checkToppings(thePizza.toppings.size())) return;
+      	if (!checkToppings(thePizza.toppings.size() + 1)) return;
       	thePizza.toppings.add(Toppings.HAM);
     	txtSelectedToppings.appendText("Ham\n");
     	hamAdd.setDisable(true);
@@ -390,7 +390,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void addPineapple(ActionEvent e) {
-      	if (!checkToppings(thePizza.toppings.size())) return;
+      	if (!checkToppings(thePizza.toppings.size() + 1)) return;
       	thePizza.toppings.add(Toppings.PINEAPPLE);
     	txtSelectedToppings.appendText("Pineapple\n");
     	pineappleAdd.setDisable(true);
@@ -405,7 +405,7 @@ public class OrderController {
     @author Emily Nelson
     */
     public void addPepperoni(ActionEvent e) {
-      	if (!checkToppings(thePizza.toppings.size())) return;
+      	if (!checkToppings(thePizza.toppings.size() + 1)) return;
       	thePizza.toppings.add(Toppings.PEPPERONI);
     	txtSelectedToppings.appendText("Pepperoni\n");
     	pepperoniAdd.setDisable(true);
