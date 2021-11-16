@@ -1,24 +1,17 @@
 package application;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import javafx.application.Application;
+
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -56,6 +49,9 @@ public class MainController {
     private ImageView pepperoniImage;
     
     @FXML
+    private String oldCustID = "";
+    
+    @FXML
     private String custID = "";
     
     /**
@@ -91,7 +87,20 @@ public class MainController {
     */
     public void showConfirmation(KeyEvent event) throws Exception {
     	if(event.getCode().equals(KeyCode.ENTER)) {
-    		if (customerID.getText().equals(custID)) {	
+    		if (customerID.getText().equals("")) {
+	    		try {
+	   	    		Stage newStage = new Stage();
+	   		    	VBox popup = new VBox();
+	   	    			Label notConfirmed = new Label("\n\nPlease enter a phone number.");
+	   			    	popup.getChildren().add(notConfirmed);
+    			    	Scene stageScene = new Scene(popup, 250, 100);
+	    			    newStage.setScene(stageScene);
+	    			   	newStage.setTitle("Order Confirmation");
+	    			   	newStage.show();
+		    	}  catch(Exception e) {
+			    	e.printStackTrace();
+			    }
+    		} else if (customerID.getText().equals(custID)) {	
 	    		try {
 	   	    		Stage newStage = new Stage();
 	   		    	VBox popup = new VBox();
@@ -105,6 +114,7 @@ public class MainController {
 			    	e.printStackTrace();
 			    }
     		} else {
+    			oldCustID = custID;
 	    		custID = customerID.getText();
 	    		boolean isValidPhone = isValidTelephoneNumber(custID);
 
@@ -142,8 +152,24 @@ public class MainController {
     @author Emily Nelson
     */
     public void openDeluxeOrderPage(ActionEvent event) throws Exception { 
-    	if (custID.equals("")) {
+    	if (custID.equals("")) { //never anything entered 
     		try {
+    			Stage newStage = new Stage();
+		    	VBox popup = new VBox();
+    			Label warning  = new Label("\n\n\t\t Please enter a phone number.");
+		    	popup.getChildren().add(warning);
+		    	Scene stageScene = new Scene(popup, 250, 100);
+		    	newStage.setScene(stageScene);
+		    	newStage.setTitle("Order Confirmation");
+		    	newStage.show();
+		    	return;
+    		} catch(Exception e) {
+    			e.printStackTrace();
+    		}
+    	}
+    	else if (oldCustID.equals(custID)) { //new order
+    		try {
+    			System.out.println("here?");
     			Stage newStage = new Stage();
 		    	VBox popup = new VBox();
     			Label warning  = new Label("\n\n\t\t Please enter a phone number.");
@@ -182,8 +208,24 @@ public class MainController {
     @author Emily Nelson
     */
     public void openHawaiianOrderPage(ActionEvent event) throws Exception { 
-    	if (custID.equals("")) {
+    	if (custID.equals("")) { //never anything entered 
     		try {
+    			Stage newStage = new Stage();
+		    	VBox popup = new VBox();
+    			Label warning  = new Label("\n\n\t\t Please enter a phone number.");
+		    	popup.getChildren().add(warning);
+		    	Scene stageScene = new Scene(popup, 250, 100);
+		    	newStage.setScene(stageScene);
+		    	newStage.setTitle("Order Confirmation");
+		    	newStage.show();
+		    	return;
+    		} catch(Exception e) {
+    			e.printStackTrace();
+    		}
+    	}
+    	else if (oldCustID.equals(custID)) { //new order
+    		try {
+    			System.out.println("here?");
     			Stage newStage = new Stage();
 		    	VBox popup = new VBox();
     			Label warning  = new Label("\n\n\t\t Please enter a phone number.");
@@ -222,8 +264,24 @@ public class MainController {
     @author Emily Nelson
     */
     public void openPepperoniOrderPage(ActionEvent event) throws Exception {  
-    	if (custID.equals("")) {
+    	if (custID.equals("")) { //never anything entered 
     		try {
+    			Stage newStage = new Stage();
+		    	VBox popup = new VBox();
+    			Label warning  = new Label("\n\n\t\t Please enter a phone number.");
+		    	popup.getChildren().add(warning);
+		    	Scene stageScene = new Scene(popup, 250, 100);
+		    	newStage.setScene(stageScene);
+		    	newStage.setTitle("Order Confirmation");
+		    	newStage.show();
+		    	return;
+    		} catch(Exception e) {
+    			e.printStackTrace();
+    		}
+    	}
+    	else if (oldCustID.equals(custID)) { //new order
+    		try {
+    			System.out.println("here?");
     			Stage newStage = new Stage();
 		    	VBox popup = new VBox();
     			Label warning  = new Label("\n\n\t\t Please enter a phone number.");
