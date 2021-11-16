@@ -110,6 +110,12 @@ public class StoreOrdersController {
     	stage.close();
     }
     
+    
+    /**
+     * Calls export() method to download list of orders
+     * @param event
+     * @author Emily Nelson
+     */
     public void downloadOrder(ActionEvent event) {
     	
     	File file = storeOrders.export();
