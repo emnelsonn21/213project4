@@ -169,7 +169,6 @@ public class MainController {
     	}
     	else if (oldCustID.equals(custID)) { //new order
     		try {
-    			System.out.println("here?");
     			Stage newStage = new Stage();
 		    	VBox popup = new VBox();
     			Label warning  = new Label("\n\n\t\t Please enter a phone number.");
@@ -225,7 +224,6 @@ public class MainController {
     	}
     	else if (oldCustID.equals(custID)) { //new order
     		try {
-    			System.out.println("here?");
     			Stage newStage = new Stage();
 		    	VBox popup = new VBox();
     			Label warning  = new Label("\n\n\t\t Please enter a phone number.");
@@ -281,7 +279,6 @@ public class MainController {
     	}
     	else if (oldCustID.equals(custID)) { //new order
     		try {
-    			System.out.println("here?");
     			Stage newStage = new Stage();
 		    	VBox popup = new VBox();
     			Label warning  = new Label("\n\n\t\t Please enter a phone number.");
