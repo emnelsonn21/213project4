@@ -143,6 +143,13 @@ public class OrderController {
     private AnchorPane scenePane;
     
     private String orderNum;
+
+    private Order order;
+    
+	private StoreOrders storeOrders;
+       
+    private Pizza thePizza;
+    
  
     /**
     Returns the number of order
@@ -162,12 +169,6 @@ public class OrderController {
     	this.orderNum = orderNum;
     }
 
-    private Order order;
-    
-	private StoreOrders storeOrders;
-       
-   
-    private Pizza thePizza;
     
     /**
     Sets up the Deluxe ordering page
@@ -631,9 +632,6 @@ public class OrderController {
 		}
 		return -1;
 	}
-	
-
-
 	
 	/**
 	Adds pizza to order
