@@ -104,6 +104,7 @@ public class StoreOrdersController {
     	String orderNum = mnuPhoneNumbers.getValue();
     	int index = findWithOrderNum(orderNum);
     	allOrders[index] = null;
+    	allOrders = moveDown(allOrders, index);
     	storeOrders.setSize(storeOrders.getSize() - 1);
     	Stage stage = (Stage) btnCancelOrder.getScene().getWindow();
     	stage.close();
@@ -142,5 +143,17 @@ public class StoreOrdersController {
     */
     public void getStoreOrders(StoreOrders storeOrders) {
     	this.storeOrders = storeOrders;
+    }
+    
+    public Order[] moveDown(Order[] allOrders, int index) {
+    	if (index < allOrders.length - 1) {
+    		while (index < allOrders.length - 1) {
+    			allOrders[index] = allOrders[index + 1];
+    			index++;
+    		}
+    		allOrders[index] = null;
+    	}
+    	
+    	return allOrders;
     }
 }
